@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Inspire</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="color-palette-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="map-container">
+  <ion-card no-margin>
+    <ion-card-header>
+       <ion-card-subtitle><b>Attendance Summary </b></ion-card-subtitle>
+    </ion-card-header>
+   <!-- <google-map height="400px" width="100%" [center]="center" zoom="12" (mapClick)="updateLocation($event)">
+    <map-marker [position]="markerPosition"></map-marker>
+  </google-map> -->
+  <gmp-map
+  [center]="center"
+  zoom="10"
+  map-id="DEMO_MAP_ID"
+  style="height: 400px"
+></gmp-map>
+</ion-card>
+</div>
+
+<div class="coordinates">
+  <p><strong>Latitude:</strong> {{ markerPosition.lat }}</p>
+  <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
+</div>

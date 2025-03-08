@@ -1,0 +1,19 @@
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+ import { AttendanceSummaryComponent } from './attendance-summary/attendance-summary.component';
+import { PageRoutingModule } from './page-routing.module';
+import { SmartPunchComponent } from './smart-punch/smart-punch.component';
+ 
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    PageRoutingModule
+    ],
+  declarations: [AttendanceSummaryComponent,SmartPunchComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class PageModule {}

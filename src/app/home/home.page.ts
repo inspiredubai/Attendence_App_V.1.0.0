@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RefresherCustomEvent } from '@ionic/angular';
-import { MessageComponent } from '../message/message.component';
-
-import { DataService, Message } from '../services/data.service';
+import { Router } from '@angular/router';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +9,58 @@ import { DataService, Message } from '../services/data.service';
   standalone: false,
 })
 export class HomePage {
-  private data = inject(DataService);
-  constructor() {}
-
-  refresh(ev: any) {
-    setTimeout(() => {
-      (ev as RefresherCustomEvent).detail.complete();
-    }, 3000);
+  popoverOpen = false;
+  popoverEvent: any = null;
+  
+  openPopover(event: Event) {
+    this.popoverEvent = event;
+    this.popoverOpen = true;
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  selectOption(option: string) {
+    console.log('Selected:', option);
+    this.popoverOpen = false;
+
+    if (option === 'logout') {
+      this.logout();
+    }
   }
+
+  logout() {
+    // Perform logout actions like clearing session storage, etc.
+    localStorage.clear(); // Example: Clear user session
+    sessionStorage.clear();
+    
+    // Navigate to the login page
+    this.router.navigate(['/login']); // OR this.navCtrl.navigateRoot('/login');
+  }
+   constructor(private router: Router,
+    private toastController: ToastController,private navCtrl: NavController, 
+   ) {}
+ ngOnInit(): void {
+   
+ }
+ async presentToast(message: string) {
+  const toast = await this.toastController.create({
+    message: message,
+    duration: 2000,
+    color: 'success',
+    position: 'middle',
+   });
+  toast.present();
+}
+
+onCheckIn() {
+  this.presentToast('CheckIn Successful!');
+}
+
+onCheckOut() {
+  this.presentToast('CheckOut Successful!');
+}
+onsmartpunch() {
+  this.router.navigate(['/smartpunch']);
+}
+ onattendancesummary() {
+       this.router.navigate(['/attendancesummary']);
+   }
 }

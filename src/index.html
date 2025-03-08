@@ -17,6 +17,27 @@
   <!-- add to homescreen for ios -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyB6TD_Yu8Hx6oozZ2o8NyyKwiFCdDQAR7U"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCshZz4xzp8XmsnnXkqwKzuFSFOjFHCVsg"></script>
+
+  <script>
+    function initMap() {
+        var location = { lat: 37.7749, lng: -122.4194 }; // Example: San Francisco
+        var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 12,
+            center: location,
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+        });
+    }
+</script>
+  <!-- <script>
+    function initMap() {
+      console.log("Google Maps API loaded!");
+    }
+  </script> -->
 </head>
 
 <body>

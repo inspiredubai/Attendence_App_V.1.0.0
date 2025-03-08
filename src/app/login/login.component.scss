@@ -1,0 +1,42 @@
+.login-page {
+    --background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  }
+  
+  .login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .text-center {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .login-button {
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .signup-link {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .signup-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
