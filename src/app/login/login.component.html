@@ -15,7 +15,11 @@
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password" placeholder="Enter your password"  formControlName="Password" ></ion-input>
           </ion-item>
-          <ion-button expand="block" class="login-button" color="primary"  (click)="onLogin()">Login</ion-button>
+          <ion-button expand="block" class="login-button" [disabled]="loginForm.invalid" color="primary" (click)="onLogin()">
+           <span *ngIf="!isLoading">Login</span> 
+            <ion-spinner *ngIf="isLoading"></ion-spinner>
+          </ion-button>
+          
           <p class="signup-link">
             Don't have an account? <a href="#">Sign Up</a>
           </p>
