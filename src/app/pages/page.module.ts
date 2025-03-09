@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
  import { AttendanceSummaryComponent } from './attendance-summary/attendance-summary.component';
 import { PageRoutingModule } from './page-routing.module';
 import { SmartPunchComponent } from './smart-punch/smart-punch.component';
+import { AttendanceDetailComponent } from './attendance-detail/attendance-detail.component';
  
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { SmartPunchComponent } from './smart-punch/smart-punch.component';
     IonicModule,
     PageRoutingModule
     ],
-  declarations: [AttendanceSummaryComponent,SmartPunchComponent],
+  declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageModule {}

@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { HomePage } from './home/home.page';
 import { AttendanceSummaryComponent } from './pages/attendance-summary/attendance-summary.component';
 import { SmartPunchComponent } from './pages/smart-punch/smart-punch.component';
+import { AttendanceDetailComponent } from './pages/attendance-detail/attendance-detail.component';
 
 const routes: Routes = [
    
@@ -35,7 +36,11 @@ const routes: Routes = [
     ,  {
       path: 'smartpunch',
       component: SmartPunchComponent
-    }
+    },
+      {
+        path: 'attendancedetail',
+        component:  AttendanceDetailComponent
+      }
 ];
 
 @NgModule({
