@@ -27,12 +27,9 @@ export class HomePage {
   }
 
   logout() {
-    // Perform logout actions like clearing session storage, etc.
-    localStorage.clear(); // Example: Clear user session
-    sessionStorage.clear();
-    
-    // Navigate to the login page
-    this.router.navigate(['/login']); // OR this.navCtrl.navigateRoot('/login');
+    localStorage.clear(); 
+    sessionStorage.clear();    
+    this.router.navigate(['/login']);
   }
    constructor(private router: Router,
     private toastController: ToastController,private navCtrl: NavController, 
