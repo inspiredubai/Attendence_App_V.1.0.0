@@ -60,4 +60,7 @@ onsmartpunch() {
  onattendancesummary() {
        this.router.navigate(['/attendancesummary']);
    }
+   onattendancedetail(){
+    this.router.navigate(['/attendancedetail'])
+   }
 }
