@@ -18,8 +18,6 @@
       <ion-button fill="clear" (click)="openPopover($event)">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
-
-      <!-- Popover component -->
       <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
         <ng-template>
           <ion-list>
@@ -37,63 +35,41 @@
 </ion-header>
 <!-- <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-button color="primary" size="small">
-      <ion-icon name="add-outline"></ion-icon> New
-    </ion-button>
-    <ion-button color="success" size="small">
-      <ion-icon name="save-outline"></ion-icon> Save
-    </ion-button>
- 
-    <ion-button color="primary" size="small">
-      <ion-icon name="reload-outline"></ion-icon> Update
-    </ion-button>
-    <ion-button color="danger" size="small">
-      <ion-icon name="trash-outline"></ion-icon> Delete
-    </ion-button>
-    <ion-button color="warning" size="small">
-      <ion-icon name="exit-outline"></ion-icon> Exit
-    </ion-button>
-  </ion-buttons>
-</ion-toolbar> -->
-<ion-toolbar>
-  <ion-buttons slot="start">
     <ion-button style="--background: var(--ion-color-custom-primary);">
       <ion-icon name="add-outline"></ion-icon> New
     </ion-button>
-    <ion-button style="--background: var(--ion-color-custom-success);">
+    <ion-button style="--background: var(--ion-color-custom-success);" (click)="saveform()">
       <ion-icon name="save-outline"></ion-icon> Save
     </ion-button>
     <ion-button style="--background: var(--ion-color-custom-primary);">
-      <ion-icon name="reload-outline"></ion-icon> Update
+      <ion-icon name="reload-outline" (click)="datashow()"></ion-icon> Update
     </ion-button>
     <ion-button style="--background: var(--ion-color-custom-danger);">
       <ion-icon name="trash-outline"></ion-icon> Delete
     </ion-button>
-    <ion-button style="--background: var(--ion-color-custom-warning);">
+     <ion-button style="--background: var(--ion-color-custom-warning);">
       <ion-icon name="exit-outline"></ion-icon> Exit
-    </ion-button>
+    </ion-button> 
   </ion-buttons>
-</ion-toolbar>
+</ion-toolbar> -->
 
-<ion-content>
+<ion-content [formGroup]="attendanceFromGroup">
   <ion-card no-margin>
     <ion-card-header>
       <ion-card-title><b>Attendance Details </b></ion-card-title>
-
-      <!-- <ion-card-subtitle><b>Attendance Details </b></ion-card-subtitle> -->
     </ion-card-header>
     <ion-grid fixed>
       <ion-row>
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Attendance Emp ID</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='AttendanceEmpID'></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">ProjectID</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='ProjectID'></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -102,14 +78,33 @@
       <ion-row>
         <ion-col size="12" size-md="6">
           <ion-item>
-            <ion-label position="floating">PunchDate</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label position="floating">Punch Date</ion-label>
+            <ion-input
+              readonly
+              [value]="formattedDate"
+              (click)="openDatePicker()"
+              placeholder="Select Date">
+              <ion-icon name="calendar-outline" slot="end" (click)="openDatePicker()"></ion-icon>
+            </ion-input>
           </ion-item>
+        
+          <!-- Date Picker Modal -->
+          <ion-modal [isOpen]="showPicker" (ionModalDidDismiss)="closeDatePicker()">
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                (ionChange)="onDateChange($event)"
+                show-default-buttons="true">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
         </ion-col>
+        
+        
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">CheckOut</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='CheckOut'></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -119,13 +114,13 @@
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Latitude</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='Latitude'></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Longitude</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='Longitude'></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -135,13 +130,13 @@
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Location Name</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='LocationName'></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Image File</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="file" formControlName='ImageFile'></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -151,22 +146,31 @@
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Remarks</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" formControlName='Remarks'></ion-input>
           </ion-item>
         </ion-col>
          
       </ion-row>
     </ion-grid>
     <ion-grid fixed>
-      <ion-row>
-        <ion-col size="12" size-sm="6" size-md="3" >
-          <ion-checkbox>Active</ion-checkbox>
+      <ion-row class="ion-align-items-center ion-justify-content-start">
+        <ion-col size="6" size-md="3">
+          <ion-item lines="none">
+            <ion-checkbox slot="start" formControlName="Active"></ion-checkbox>
+            <ion-label>Active</ion-label>
+          </ion-item>
         </ion-col>
-        <ion-col size="12" size-sm="6" size-md="3">
-          <ion-checkbox>PunchMode</ion-checkbox>
-
+    
+        <ion-col size="6" size-md="3">
+          <ion-item lines="none">
+            <ion-checkbox slot="start" formControlName="PunchMode"></ion-checkbox>
+            <ion-label>PunchMode</ion-label>
+          </ion-item>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> 
+    <ion-button expand="block" style="--background: var(--ion-color-custom-success);" (click)="saveform()">
+      <ion-icon name="save-outline"></ion-icon> Save
+    </ion-button>   
   </ion-card>
 </ion-content>

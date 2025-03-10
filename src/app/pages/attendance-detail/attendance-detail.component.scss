@@ -19,4 +19,20 @@ ion-toolbar {
       }
        
     }
-    
+    ion-input {
+        cursor: pointer;
+      }
+      
+      ion-icon {
+        // margin-left: 8px;
+        cursor: pointer;
+      }
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+      }
+      
+      ion-checkbox {
+        margin-right: 8px;
+      }
+      

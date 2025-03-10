@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-attendance-detail',
@@ -10,11 +13,28 @@ import { NavController } from '@ionic/angular';
 
 })
 export class AttendanceDetailComponent  implements OnInit {
-
+  attendanceFromGroup:any;
   popoverOpen = false;
    popoverEvent: any = null;
+   formattedDate: string = '';
+   showPicker: boolean = false;
  
-   constructor(private navCtrl: NavController, private router: Router) {}
+   openDatePicker() {
+     this.showPicker = true;
+   }
+ 
+   closeDatePicker() {
+     this.showPicker = false;
+   }
+ 
+   onDateChange(event: any) {
+     const selectedDate = new Date(event.detail.value);
+     this.formattedDate = selectedDate.toLocaleDateString();
+     this.closeDatePicker();
+   }
+   constructor(private navCtrl: NavController, private router: Router,private fb: UntypedFormBuilder,
+    private dataservice: DataService,private toastService: ToastService
+   ) {}
  
    openPopover(event: Event) {
      this.popoverEvent = event;
@@ -31,28 +51,45 @@ export class AttendanceDetailComponent  implements OnInit {
    }
  
    logout() {
-     // Perform logout actions like clearing session storage, etc.
-     localStorage.clear(); // Example: Clear user session
+      localStorage.clear();  
      sessionStorage.clear();
      
-     // Navigate to the login page
-     this.router.navigate(['/login']); // OR this.navCtrl.navigateRoot('/login');
+      this.router.navigate(['/login']);  
    }
  
-  ngOnInit() {}
+  ngOnInit() {
+    this.attendanceFromGroup = this.fb.group({
+      AttendanceID: [0, [Validators.required]],
+      AttendanceEmpID: [0, [Validators.required]],
+      ProjectID: [-1, [Validators.required]],
+      PunchDate: [null, [Validators.required]],
+      CheckOut:[null, [Validators.required]],
+      Latitude:[null, [Validators.required]],
+      Longitude:[null, [Validators.required]],
+      LocationName:[null, [Validators.required]],
+      ImageFile:["null"],
+      Remarks:[null],
+      PunchMode:[false, ],
+      Active:[false,],
+      });
+      this.datashow()
+  }
+  saveform(){
+    console.log('formvalue',this.attendanceFromGroup.value);
+    this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
+      console.log("list",res);
+      if (res) {
+         this.toastService.presentToast('Data Save sucessfully');
 
+      }else{
+        this.toastService.presentToastErrror('Something went wrong');
+      }
+    })
+  }
+  datashow(){
+ this.dataservice.attendancedatalist().subscribe((res)=>{
+  console.log("list",res);
+})
+  }
 }
-// {
-//   public int AttendanceID { get; set; }
-//   public long AttendanceEmpID { get; set; }
-//   public long ProjectID { get; set; }
-//   public DateTime? PunchDate { get; set; }
-//   public string CheckOut { get; set; }
-//   public string Latitude { get; set; }
-//   public string Longitude { get; set; }
-//   public string LocationName { get; set; }
-//   public string ImageFile { get; set; }
-//   public string Remarks { get; set; }
-//   public bool? PunchMode { get; set; }
-//   public bool? Active { get; set; }
-// }
+ 
