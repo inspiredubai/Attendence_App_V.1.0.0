@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 // import { UserFile } from 'src/app/routes/domain/UserFile';
 // import { User } from 'src/app/routes/domain/User';
 
@@ -21,11 +21,23 @@ export class LoginService {
 
   }
 
-  public loginRequest(data1: any) {
-    console.log(data1);
-    return this.httpClient.post<any>(this.baseUrl + 'Login', data1)
-  }
+  // public loginRequest(data1: any) {
+  //   console.log(data1);
+  //   return this.httpClient.post<any>(this.baseUrl + 'Login', data1)
+  // }
 
+  public loginRequest(data1: any) {  
+    return this.httpClient.post<any>(this.baseUrl + 'Login', data1).pipe(
+      tap(response => {  
+        if (response.valid) { 
+          localStorage.setItem('userDetails', JSON.stringify(response.result));
+        }
+      }),
+      catchError(error => {
+        return of(null); 
+      })
+    );
+  }
 
   logout() {
     // this.storage.remove(CredentialKeys.Login);

@@ -18,6 +18,8 @@ export class AttendanceDetailComponent  implements OnInit {
    popoverEvent: any = null;
    formattedDate: string = '';
    showPicker: boolean = false;
+  url: any;
+  userDetails: any;
  
    openDatePicker() {
      this.showPicker = true;
@@ -58,16 +60,19 @@ export class AttendanceDetailComponent  implements OnInit {
    }
  
   ngOnInit() {
+  this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
+console.log("Retrieved User:", this.userDetails);
+
     this.attendanceFromGroup = this.fb.group({
       AttendanceID: [0, [Validators.required]],
-      AttendanceEmpID: [0, [Validators.required]],
+      AttendanceEmpID: [this.userDetails.userId],
       ProjectID: [-1, [Validators.required]],
       PunchDate: [null, [Validators.required]],
       CheckOut:[null, [Validators.required]],
       Latitude:[null, [Validators.required]],
       Longitude:[null, [Validators.required]],
       LocationName:[null, [Validators.required]],
-      ImageFile:["null"],
+      ImageFile:[null],
       Remarks:[null],
       PunchMode:[false, ],
       Active:[false,],
@@ -75,9 +80,7 @@ export class AttendanceDetailComponent  implements OnInit {
       this.datashow()
   }
   saveform(){
-    console.log('formvalue',this.attendanceFromGroup.value);
     this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
-      console.log("list",res);
       if (res) {
          this.toastService.presentToast('Data Save sucessfully');
 
@@ -91,5 +94,19 @@ export class AttendanceDetailComponent  implements OnInit {
   console.log("list",res);
 })
   }
+  onSelectFile(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = () => {
+        this.url = reader.result as string;
+        this.attendanceFromGroup.controls['ImageFile'].setValue(this.url);
+      };
+  
+      reader.readAsDataURL(file);
+    }
+  }
+  
 }
  

@@ -60,12 +60,12 @@
     </ion-card-header>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="12" size-md="6">
+        <!-- <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Attendance Emp ID</ion-label>
             <ion-input type="text" formControlName='AttendanceEmpID'></ion-input>
           </ion-item>
-        </ion-col>
+        </ion-col> -->
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">ProjectID</ion-label>
@@ -136,7 +136,7 @@
         <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Image File</ion-label>
-            <ion-input type="file" formControlName='ImageFile'></ion-input>
+            <ion-input type="file" formControlName='ImageFile' (change)="onSelectFile($event)"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
