@@ -26,17 +26,16 @@
     <ion-card-header>
       <ion-card-title><b>Attendance Summary </b></ion-card-title>
       <p><strong>Latitude:</strong> {{ markerPosition.lat }}</p>
-      <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
-    
-      <google-map 
-        height="400px"
-        width="100%"
-        [center]="center"
-        [zoom]="zoom"
-        (mapClick)="updateMarkerPosition($event)">
-        <map-marker [position]="markerPosition"></map-marker>
-      </google-map>
-    
+  <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
+
+  <google-map 
+    height="400px"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="updateMarkerPosition($event)">
+    <map-marker [position]="markerPosition"></map-marker>
+  </google-map>
     </ion-card-header>
   </ion-card>
 </div>
