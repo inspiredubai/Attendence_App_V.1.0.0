@@ -7,6 +7,7 @@ import { PageRoutingModule } from './page-routing.module';
 import { SmartPunchComponent } from './smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './attendance-detail/attendance-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
  
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule,
     PageRoutingModule,
      ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        GoogleMapsModule
     ],
   declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
