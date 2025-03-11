@@ -1,14 +1,7 @@
 {
   "name": "attendance_app",
-  "type": "angular",
   "integrations": {
     "capacitor": {}
   },
-  "id": "com.yourcompany.attendanceapp",
-  "proxy": [
-    {
-      "path": "/api",
-      "proxyUrl": "http://103.74.54.207:8092/api/"
-    }
-  ]
+  "type": "angular"
 }
