@@ -57,14 +57,12 @@ async getCurrentLocation() {
     console.log('Current Location:', this.center);
   } catch (error) {
     console.error('Error getting location:', error);
-    // Fallback to a default location (e.g., New Delhi)
-    this.center = { lat: 28.7041, lng: 77.1025 };
+     this.center = { lat: 28.7041, lng: 77.1025 };
     this.markerPosition = { ...this.center };
   }
 }
 
-// Method to update the marker position when clicking on the map
-updateMarkerPosition(event: google.maps.MapMouseEvent) {
+ updateMarkerPosition(event: google.maps.MapMouseEvent) {
   if (event.latLng) {
     this.markerPosition = {
       lat: event.latLng.lat(),
