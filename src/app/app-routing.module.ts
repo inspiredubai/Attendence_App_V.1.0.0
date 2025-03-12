@@ -5,6 +5,7 @@ import { HomePage } from './home/home.page';
 import { AttendanceSummaryComponent } from './pages/attendance-summary/attendance-summary.component';
 import { SmartPunchComponent } from './pages/smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './pages/attendance-detail/attendance-detail.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [
    
@@ -32,7 +33,11 @@ const routes: Routes = [
    {
       path: 'attendancesummary',
       component: AttendanceSummaryComponent
-    }
+    },
+      {
+        path: 'Check-Out',
+        component:  CheckoutComponent
+      }
     ,  {
       path: 'smartpunch',
       component: SmartPunchComponent

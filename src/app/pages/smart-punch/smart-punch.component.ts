@@ -3,6 +3,7 @@ import { NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-pl
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-smart-punch',
@@ -40,7 +41,7 @@ center!: google.maps.LatLngLiteral;
 markerPosition!: google.maps.LatLngLiteral;
 zoom = 15;
 
-constructor() {}
+constructor(private dataservice:DataService) {}
 
 ngOnInit(): void {
   this.getCurrentLocation();
@@ -89,6 +90,7 @@ updateMarkerPosition(event: google.maps.MapMouseEvent) {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
     };
+      this.dataservice.sendData(this.markerPosition);
     console.log('Updated Marker Position:', this.markerPosition);
   }
 }
