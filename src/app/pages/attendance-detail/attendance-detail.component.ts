@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { ToastService } from 'src/app/services/toast.service';
-
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
 @Component({
   selector: 'app-attendance-detail',
   templateUrl: './attendance-detail.component.html',
@@ -13,6 +14,9 @@ import { ToastService } from 'src/app/services/toast.service';
 
 })
 export class AttendanceDetailComponent  implements OnInit {
+  center!: google.maps.LatLngLiteral;
+markerPosition!: google.maps.LatLngLiteral;
+zoom = 15;
   attendanceFromGroup:any;
   popoverOpen = false;
    popoverEvent: any = null;
@@ -20,6 +24,7 @@ export class AttendanceDetailComponent  implements OnInit {
    showPicker: boolean = false;
   url: any;
   userDetails: any;
+  receivedData: any;
  
    openDatePicker() {
      this.showPicker = true;
@@ -61,8 +66,6 @@ export class AttendanceDetailComponent  implements OnInit {
  
   ngOnInit() {
   this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
-console.log("Retrieved User:", this.userDetails);
-
     this.attendanceFromGroup = this.fb.group({
       AttendanceID: [0, [Validators.required]],
       AttendanceEmpID: [this.userDetails.userId],
@@ -71,14 +74,22 @@ console.log("Retrieved User:", this.userDetails);
       CheckOut:[null, [Validators.required]],
       Latitude:[null, [Validators.required]],
       Longitude:[null, [Validators.required]],
-      LocationName:[null, [Validators.required]],
+      LocationName:[''],
       ImageFile:[null],
       Remarks:[null],
-      PunchMode:[false, ],
+      PunchMode:[false,],
       Active:[false,],
       });
-      this.datashow()
-  }
+    //  this.datashow()
+    this.dataservice.data$.subscribe(data => {
+      this.receivedData = data;
+    });
+    if(this.receivedData==null){
+     this.getCurrentLocation()
+    }else{
+      this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
+      this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
+    }  }
   saveform(){
     this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
       if (res) {
@@ -107,6 +118,70 @@ console.log("Retrieved User:", this.userDetails);
       reader.readAsDataURL(file);
     }
   }
+  async getCurrentLocation() {
+    try {
+      if (Capacitor.isNativePlatform()) {
+        const position = await Geolocation.getCurrentPosition();
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+        this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
   
+        this.markerPosition = { ...this.center };
+        
+        this.getAddressFromCoordinates(this.center.lat, this.center.lng);
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.center = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+            this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+            
+            this.markerPosition = { ...this.center };
+  
+            this.getAddressFromCoordinates(this.center.lat, this.center.lng);
+          },
+          (error) => {
+            console.error('Browser Geolocation Error:', error);
+            this.setDefaultLocation();
+          }
+        );
+      }
+    } catch (error) {
+      console.error('Error getting location:', error);
+      this.setDefaultLocation();
+    }
+  }
+  
+  setDefaultLocation() {
+    this.center = { lat: 31.4933248, lng: 74.3079936 };
+    this.markerPosition = { ...this.center };
+    this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+    this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+  
+    this.getAddressFromCoordinates(this.center.lat, this.center.lng);
+  }  
+  getAddressFromCoordinates(lat: number, lng: number) {
+    const geocoder = new google.maps.Geocoder();
+    const latlng = { lat, lng };
+  
+    geocoder.geocode({ location: latlng }, (results:any, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          const address = results[0].formatted_address;          
+          this.attendanceFromGroup.get('LocationName')?.setValue(address);
+        } else {
+          console.log('No address found for this location.');
+        }
+      } else {
+        console.error('Geocoder failed due to:', status);
+      }
+    });
+  }
 }
  

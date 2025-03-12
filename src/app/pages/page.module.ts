@@ -8,6 +8,7 @@ import { SmartPunchComponent } from './smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './attendance-detail/attendance-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { CheckoutComponent } from './checkout/checkout.component';
  
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
         HttpClientModule,
         GoogleMapsModule
     ],
-  declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent],
+  declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent,CheckoutComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageModule {}

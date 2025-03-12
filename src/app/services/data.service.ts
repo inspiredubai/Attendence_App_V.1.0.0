@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface Message {
@@ -11,13 +12,15 @@ export interface Message {
 })
 export class DataService {
      baseUrl: string = environment.apiRootURL;
-   
-  constructor(private httpClient: HttpClient) {
+     private dataSubject = new Subject<any>(); 
 
-  
-}
+  constructor(private httpClient: HttpClient) {}
 
-public attendancedatalist() {
+    data$ = this.dataSubject.asObservable();
+    sendData(data: any) {
+    this.dataSubject.next(data);
+  }
+   public attendancedatalist() {
     return this.httpClient.get<any>(this.baseUrl + 'Hr_AttendanceSheet/GetAllHr_AttendanceSheet',)
 }
 public attendancedatalistpost(data:any) {

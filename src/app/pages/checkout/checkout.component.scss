@@ -1,0 +1,38 @@
+ion-toolbar {
+    --background: #f9f5f5;
+    --color: white;
+  
+    --border-color: #eeecee;
+    --border-width: 1px 0;
+    --border-style: double;
+  
+    // --min-height: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    }
+    ::ng-deep{
+       :root {
+        --ion-color-custom-primary: #007bff; /* Blue */
+        --ion-color-custom-success: #28a745; /* Green */
+        --ion-color-custom-danger: #dc3545; /* Red */
+        --ion-color-custom-warning: #ffc107; /* Yellow */
+      }
+       
+    }
+    ion-input {
+        cursor: pointer;
+      }
+      
+      ion-icon {
+        // margin-left: 8px;
+        cursor: pointer;
+      }
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+      }
+      
+      ion-checkbox {
+        margin-right: 8px;
+      }
+      

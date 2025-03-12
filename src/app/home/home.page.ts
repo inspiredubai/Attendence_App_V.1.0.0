@@ -48,11 +48,14 @@ export class HomePage {
 }
 
 onCheckIn() {
-  this.presentToast('CheckIn Successful!');
+  // this.presentToast('CheckIn Successful!');
+  this.router.navigate(['/attendancedetail'])
+
 }
 
 onCheckOut() {
-  this.presentToast('CheckOut Successful!');
+  // this.presentToast('CheckOut Successful!');
+  this.router.navigate(['/Check-Out'])
 }
 onsmartpunch() {
   this.router.navigate(['/smartpunch']);
@@ -60,7 +63,7 @@ onsmartpunch() {
  onattendancesummary() {
        this.router.navigate(['/attendancesummary']);
    }
-   onattendancedetail(){
-    this.router.navigate(['/attendancedetail'])
-   }
+  //  onattendancedetail(){
+  //   this.router.navigate(['/attendancedetail'])
+  //  }
 }
