@@ -21,28 +21,22 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-   <ion-card no-margin>
+<div class="map-container">
+  <ion-card no-margin>
     <ion-card-header>
-      <ion-card-title><b>Attendance Summary</b></ion-card-title>
+      <ion-card-title><b>Attendance Summary </b></ion-card-title>
       <p><strong>Latitude:</strong> {{ markerPosition.lat }}</p>
-      <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
+  <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
 
-      <!-- Button to trigger location update -->
-       
-      <!-- Loading indicator -->
-      <div *ngIf="loading" class="loading-text">
-        Fetching current location...
-      </div>
-
-      <!-- Google Map with marker -->
-      <google-map
-        height="400px"
-        width="100%"
-        [center]="center"
-        [zoom]="zoom">
-        <map-marker [position]="markerPosition"></map-marker>
-      </google-map>
+  <google-map 
+    height="400px"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="updateMarkerPosition($event)">
+    <map-marker [position]="markerPosition"></map-marker>
+  </google-map>
     </ion-card-header>
   </ion-card>
- 
+</div>
+   
