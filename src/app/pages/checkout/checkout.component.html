@@ -60,7 +60,7 @@
     </ion-card-header>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="12" size-md="6">
+        <!-- <ion-col size="12" size-md="6">
           <ion-item>
             <ion-label position="floating">Punch Date</ion-label>
             <ion-input
@@ -73,7 +73,6 @@
             </ion-input>
           </ion-item>
         
-          <!-- Date Picker Modal -->
           <ion-modal [isOpen]="showPicker" (ionModalDidDismiss)="closeDatePicker()">
             <ng-template>
               <ion-datetime
@@ -84,7 +83,7 @@
               </ion-datetime>
             </ng-template>
           </ion-modal>
-        </ion-col>
+        </ion-col> -->
         
         
         <!-- <ion-col size="12" size-md="6">
@@ -138,7 +137,7 @@
          
       </ion-row>
     </ion-grid>
-    <ion-grid fixed>
+    <!-- <ion-grid fixed>
       <ion-row class="ion-align-items-center ion-justify-content-start">
         <ion-col size="6" size-md="3">
           <ion-item lines="none">
@@ -154,7 +153,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-    </ion-grid> 
+    </ion-grid>  -->
     <ion-button expand="block" style="--background: var(--ion-color-custom-success);" (click)="saveform()">
       <ion-icon name="save-outline"></ion-icon> Save
     </ion-button>   

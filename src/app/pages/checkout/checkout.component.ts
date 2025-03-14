@@ -66,9 +66,6 @@ zoom = 15;
   
    ngOnInit() {
    this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}'); 
-
-  
-
      this.attendanceFromGroup = this.fb.group({
        AttendanceID: [0, [Validators.required]],
        AttendanceEmpID: [this.userDetails.userId],
