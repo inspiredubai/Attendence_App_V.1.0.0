@@ -71,11 +71,13 @@
 
   </div>
 </ion-content> -->
-<ion-content>
+<ion-content>     
+  <ion-card no-margin>
+    <ion-card-header>
+      <ion-card-title><b>Smart Punch</b></ion-card-title>
+    </ion-card-header>
   <div class="content-wrapper">
-
-     <h2 class="section-title">Reports</h2>
-    <ion-grid>
+     <ion-grid>
       <ion-row>
         <ion-col size="12" size-md="3">
           <ion-card class="custom-card" (click)="onCheckIn()">
@@ -92,19 +94,17 @@
             <ion-card-content>Attendance Summary</ion-card-content>
           </ion-card>
         </ion-col>
-      </ion-row>
+           <ion-col size="12" size-md="6">
+            <ion-card class="custom-card" (click)="onsmartpunch()">
+              <ion-card-content>SMART PUNCH - ONE TO ONE</ion-card-content>
+            </ion-card>
+          </ion-col>
+       </ion-row>
     </ion-grid>
-
-     <h2 class="section-title">Smart Punch</h2>
     <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <ion-card class="custom-card" (click)="onsmartpunch()">
-            <ion-card-content>SMART PUNCH - ONE TO ONE</ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+      
     </ion-grid>
 
   </div>
+  </ion-card>
 </ion-content>

@@ -7,9 +7,9 @@ ion-toolbar {
     padding: 1em;
   }
   
-  .section-title {
+  ion-card-title{
     color: #3b57c1;
-    font-size: 1.2em;
+    font-size: 1.6em;
     margin: 1em 0 0.5em 0;
     font-weight: bold;
   }
@@ -54,10 +54,7 @@ ion-toolbar {
     padding: 20px;
   }
   
-  .section-title {
-    text-align: left; /* Keep the title always left-aligned */
-    margin-left: 10px; /* Add some margin for better spacing */
-  }
+ 
   
   @media only screen and (max-width: 768px) {
     .content-wrapper {
