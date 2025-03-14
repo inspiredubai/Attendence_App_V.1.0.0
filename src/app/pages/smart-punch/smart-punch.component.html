@@ -22,7 +22,7 @@
   </ion-toolbar>
 </ion-header>
 <div class="map-container">
-  <ion-card no-margin>
+  <!-- <ion-card no-margin>
     <ion-card-header>
       <ion-card-title><b>Attendance Summary </b></ion-card-title>
       <p><strong>Latitude:</strong> {{ markerPosition.lat }}</p>
@@ -37,6 +37,32 @@
     <map-marker [position]="markerPosition"></map-marker>
   </google-map>
     </ion-card-header>
-  </ion-card>
+  </ion-card> -->
+
+
+
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Current Location</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-button expand="full" (click)="showLocation()">Show My Location</ion-button>
+  
+    <ion-card *ngIf="latitude && longitude">
+      <ion-card-content>
+        <h2>Latitude: {{ latitude }}</h2>
+        <h2>Longitude: {{ longitude }}</h2>
+      </ion-card-content>
+    </ion-card>
+  
+    <div id="map"></div>
+  </ion-content>
+  
+  
+
+
 </div>
    
