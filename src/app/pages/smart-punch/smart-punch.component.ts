@@ -27,9 +27,7 @@ ngOnInit(): void {
 }
 async getCurrentLocation() {
   try {
-    // Check if running on a device (Capacitor) or browser
     if (Capacitor.isNativePlatform()) {
-      // Native device (using Capacitor Geolocation)
       const position = await Geolocation.getCurrentPosition();
       this.center = {
         lat: position.coords.latitude,
@@ -38,7 +36,6 @@ async getCurrentLocation() {
       this.markerPosition = { ...this.center };
       console.log('Native Device Location:', this.center);
     } else {
-      // Browser-based geolocation
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.center = {
@@ -46,12 +43,12 @@ async getCurrentLocation() {
             lng: position.coords.longitude,
           };
           this.markerPosition = { ...this.center };
-          console.log('Browser Location:', this.center);
+          console.log('Browser Location: locaton', this.center);
         },
         (error) => {
           console.error('Browser Geolocation Error:', error);
-          this.center = { lat: 31.4933248, lng: 74.3079936 };  
-          this.markerPosition = { ...this.center };
+          // this.center = { lat: 31.4933248, lng: 74.3079936 };  
+          // this.markerPosition = { ...this.center };
         }
       );
     }
@@ -73,5 +70,4 @@ updateMarkerPosition(event: google.maps.MapMouseEvent) {
     console.log('Updated Marker Position:', this.markerPosition);
   }
 }
-
 }
