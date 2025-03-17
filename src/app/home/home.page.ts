@@ -135,7 +135,7 @@ onsmartpunch() {
             this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
             
             this.markerPosition = { ...this.center };
-            console.log('Browser Location:', this.center);
+            // console.log('Browser Location:', this.center);
   
             this.getAddressFromCoordinates(this.center.lat, this.center.lng);
           },
