@@ -59,6 +59,7 @@ export class HomePage {
          ImageFile:[null],
          Remarks:[null],
          PunchMode:[false,],
+         PunchTime:[null],
          Active:[false,],
          });
        //  this.datashow()
@@ -71,9 +72,9 @@ export class HomePage {
          this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
          this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
        } 
-     }
-
+     }     
 onCheckIn() {
+  this.getCurrentTime()
   this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
     if (res) {
        this.toastService.presentToast('Check-In sucessfully');
@@ -87,6 +88,7 @@ onCheckIn() {
 }
 
 onCheckOut() {
+  this.getCurrentTime()
   this.attendanceFromGroup.controls.PunchMode.setValue(true)
   this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
     if (res) {
@@ -103,78 +105,83 @@ onsmartpunch() {
  onattendancesummary() {
        this.router.navigate(['/attendancesummary']);
    }
-  //  onattendancedetail(){
+ 
   //   this.router.navigate(['/attendancedetail'])
   //  }
 
 
+  
   async getCurrentLocation() {
     try {
       if (Capacitor.isNativePlatform()) {
-        const position = await Geolocation.getCurrentPosition();
+        const position = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        });
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-        this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
-  
+          this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+         this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
         this.markerPosition = { ...this.center };
-        
-        // Get location name
-        this.getAddressFromCoordinates(this.center.lat, this.center.lng);
-      } else {
-        // Browser-based geolocation
+        console.log('Native Device Location:', this.center);
+      }
+      else {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             this.center = {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             };
-            this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-            this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
-            
+               this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+               this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
             this.markerPosition = { ...this.center };
-            // console.log('Browser Location:', this.center);
-  
-            this.getAddressFromCoordinates(this.center.lat, this.center.lng);
+            console.log('Browser Location:', this.center);
           },
           (error) => {
             console.error('Browser Geolocation Error:', error);
             this.setDefaultLocation();
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
           }
         );
       }
     } catch (error) {
       console.error('Error getting location:', error);
-     // this.setDefaultLocation();
+      this.setDefaultLocation();
     }
   }
-  
+
   setDefaultLocation() {
     this.center = { lat: 31.4933248, lng: 74.3079936 };
     this.markerPosition = { ...this.center };
-    this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-    this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
-  
-    this.getAddressFromCoordinates(this.center.lat, this.center.lng);
-  }  
-  getAddressFromCoordinates(lat: number, lng: number) {
-    const geocoder = new google.maps.Geocoder();
-    const latlng = { lat, lng };
-  
-    geocoder.geocode({ location: latlng }, (results:any, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          const address = results[0].formatted_address;          
-          this.attendanceFromGroup.get('LocationName')?.setValue(address);
-        } else {
-          console.log('No address found for this location.');
-        }
-      } else {
-        console.error('Geocoder failed due to:', status);
-      }
-    });
-  } 
+  }
 
+  updateMarkerPosition(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      this.markerPosition = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      };
+         this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+         this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+      this.dataservice.sendData(this.markerPosition);
+      console.log('Updated Marker Position:', this.markerPosition);
+    }
+  }
+  getCurrentTime(){
+    const currentTime = new Date();
+    const formattedTime = currentTime.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    this.attendanceFromGroup.get('PunchTime')?.setValue(formattedTime);
+  }
 }
