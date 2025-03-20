@@ -59,6 +59,7 @@ export class HomePage {
          ImageFile:[null],
          Remarks:[null],
          PunchMode:[false,],
+         PunchTime:[null],
          Active:[false,],
          });
        //  this.datashow()
@@ -71,9 +72,9 @@ export class HomePage {
          this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
          this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
        } 
-     }
-
+     }     
 onCheckIn() {
+  this.getCurrentTime()
   this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
     if (res) {
        this.toastService.presentToast('Check-In sucessfully');
@@ -87,6 +88,7 @@ onCheckIn() {
 }
 
 onCheckOut() {
+  this.getCurrentTime()
   this.attendanceFromGroup.controls.PunchMode.setValue(true)
   this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
     if (res) {
@@ -171,5 +173,15 @@ onsmartpunch() {
       this.dataservice.sendData(this.markerPosition);
       console.log('Updated Marker Position:', this.markerPosition);
     }
+  }
+  getCurrentTime(){
+    const currentTime = new Date();
+    const formattedTime = currentTime.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    this.attendanceFromGroup.get('PunchTime')?.setValue(formattedTime);
   }
 }
