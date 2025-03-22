@@ -16,6 +16,7 @@ export class AttendanceSummaryComponent  implements OnInit {
   popoverOpen = false;
   popoverEvent: any = null;
   SummeryFromGroup:any;
+  ListData: any;
   constructor(private navCtrl: NavController,
               private router: Router,
               private fb: UntypedFormBuilder, 
@@ -49,16 +50,21 @@ export class AttendanceSummaryComponent  implements OnInit {
 
   this.SummeryFromGroup = this.fb.group({
     
-    FromDate: [new Date().toISOString().split('T')[0]],
-    ToDate: [new Date().toISOString().split('T')[0]],
+    FromDate: [new Date()],
+    ToDate: [new Date()],
 
       
          });
-this. getReport()
   }
 
   getReport(){
-    this.dataservice.Reportattendancedatal(this.SummeryFromGroup.value).subscribe((res)=>{
+ let payload={
+  FromDate:this.SummeryFromGroup.get('FromDate').value!=new Date()?this.SummeryFromGroup.get('FromDate').value:null,
+  ToDate:this.SummeryFromGroup.get('ToDate').value!=new Date()?this.SummeryFromGroup.get('ToDate').value:null,
+ }
+
+    this.dataservice.Reportattendancedatal(payload).subscribe((res)=>{
+      this.ListData=res
       console.log("report",res)
     })
   }
