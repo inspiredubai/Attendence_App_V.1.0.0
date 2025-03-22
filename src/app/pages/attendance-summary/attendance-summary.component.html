@@ -18,7 +18,7 @@
       <ion-button fill="clear" (click)="openPopover($event)">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
-      
+
       <!-- Popover component -->
       <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
         <ng-template>
@@ -29,13 +29,25 @@
           </ion-list>
         </ng-template>
       </ion-popover>
-      
+
 
 
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button expand="block" style="--background: var(--ion-color-custom-primary);">
+      <ion-icon name="add-outline"></ion-icon> New
+    </ion-button>   
+    <ion-button expand="block" style="--background: var(--ion-color-custom-success);">
+      <ion-icon name="save-outline"></ion-icon> Save
+    </ion-button>   
+    <ion-button expand="block" style="--background: var(--ion-color-custom-primary);">
+      <ion-icon name="list-outline"></ion-icon> List
+    </ion-button>   
+  </ion-buttons>
+</ion-toolbar>
 <ion-content>
   <ion-card no-margin>
     <ion-card-header>
@@ -47,21 +59,32 @@
           <ion-item>
             <ion-label color="primary" position="stacked">
               <ion-icon name="calendar"></ion-icon>
-              To Date
+              From Date
             </ion-label>
-            <ion-input placeholder="Select Date" readonly></ion-input>
+            <ion-input type="date" placeholder="Select Date" id="dateInput">
+            </ion-input>
             <ion-icon name="calendar-outline" slot="end"></ion-icon>
           </ion-item>
-        </ion-col>
-        <ion-col size="12" size-md="6">
-          <ion-item>
+          <!-- <ion-item>
             <ion-label color="primary" position="stacked">
               <ion-icon name="calendar"></ion-icon>
               From Date
             </ion-label>
             <ion-input placeholder="Select Date" readonly></ion-input>
             <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item> -->
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-label color="primary" position="stacked">
+              <ion-icon name="calendar"></ion-icon>
+              To Date
+            </ion-label>
+            <ion-input type="date" placeholder="Select Date" id="dateInput">
+            </ion-input>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
           </ion-item>
+
         </ion-col>
       </ion-row>
     </ion-grid>
