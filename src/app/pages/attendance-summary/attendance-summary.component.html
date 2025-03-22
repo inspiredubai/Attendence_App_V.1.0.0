@@ -35,7 +35,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-toolbar>
+<!-- <ion-toolbar>
   <ion-buttons slot="start">
     <ion-button expand="block" style="--background: var(--ion-color-custom-primary);">
       <ion-icon name="add-outline"></ion-icon> New
@@ -47,7 +47,7 @@
       <ion-icon name="list-outline"></ion-icon> List
     </ion-button>   
   </ion-buttons>
-</ion-toolbar>
+</ion-toolbar> -->
 <ion-content>
   <ion-card no-margin>
     <ion-card-header>
@@ -88,5 +88,38 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+        </ion-col>
+        <ion-col size="12" size-md="3">
+          <ion-button expand="block" id="open-custom-dialog" style="--background: var(--ion-color-custom-primary);">
+            <ion-icon name="list-outline"></ion-icon> List
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 </ion-content>
+ 
+  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+    <ng-template>
+      <div class="wrapper">
+        <h1>Details</h1>
+        <table class="ion-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Any</th>
+              <th>Things</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr></tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ion-modal>
+ 
