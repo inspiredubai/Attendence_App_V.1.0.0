@@ -51,7 +51,7 @@ export class HomePage {
          AttendanceID: [0, [Validators.required]],
          AttendanceEmpID: [this.userDetails.userId],
          ProjectID: [-1, [Validators.required]],
-         PunchDate: [new Date(), [Validators.required]],
+         PunchDate: [new Date().toISOString().split('T')[0], [Validators.required]],
          CheckOut:[null, [Validators.required]],
          Latitude:[null, [Validators.required]],
          Longitude:[null, [Validators.required]],
