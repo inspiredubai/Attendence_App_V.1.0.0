@@ -38,12 +38,9 @@ export class AttendanceSummaryComponent  implements OnInit {
   }
 
   logout() {
-    // Perform logout actions like clearing session storage, etc.
-    localStorage.clear(); // Example: Clear user session
+    localStorage.clear(); 
     sessionStorage.clear();
-    
-    // Navigate to the login page
-    this.router.navigate(['/login']); // OR this.navCtrl.navigateRoot('/login');
+    this.router.navigate(['/login']); 
   }
 
   ngOnInit() {
@@ -59,13 +56,12 @@ export class AttendanceSummaryComponent  implements OnInit {
 
   getReport(){
  let payload={
-  FromDate:this.SummeryFromGroup.get('FromDate').value!=new Date()?this.SummeryFromGroup.get('FromDate').value:null,
-  ToDate:this.SummeryFromGroup.get('ToDate').value!=new Date()?this.SummeryFromGroup.get('ToDate').value:null,
+  FromDate:this.SummeryFromGroup.get('FromDate').value!=null?this.SummeryFromGroup.get('FromDate').value:null,
+  ToDate:this.SummeryFromGroup.get('ToDate').value!=null?this.SummeryFromGroup.get('ToDate').value:null,
  }
 
     this.dataservice.Reportattendancedatal(payload).subscribe((res)=>{
       this.ListData=res
-      console.log("report",res)
     })
   }
 }
