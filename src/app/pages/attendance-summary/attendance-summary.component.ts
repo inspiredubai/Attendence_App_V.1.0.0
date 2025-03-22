@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonSelect, NavController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-attendance-summary',
@@ -12,8 +15,12 @@ import { IonSelect, NavController } from '@ionic/angular';
 export class AttendanceSummaryComponent  implements OnInit {
   popoverOpen = false;
   popoverEvent: any = null;
-
-  constructor(private navCtrl: NavController, private router: Router) {}
+  SummeryFromGroup:any;
+  constructor(private navCtrl: NavController,
+              private router: Router,
+              private fb: UntypedFormBuilder, 
+              private dataservice: DataService,private toastService: ToastService
+            ) {}
 
   openPopover(event: Event) {
     this.popoverEvent = event;
@@ -38,6 +45,21 @@ export class AttendanceSummaryComponent  implements OnInit {
     this.router.navigate(['/login']); // OR this.navCtrl.navigateRoot('/login');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
 
+  this.SummeryFromGroup = this.fb.group({
+    
+    FromDate: [new Date().toISOString().split('T')[0]],
+    ToDate: [new Date().toISOString().split('T')[0]],
+
+      
+         });
+this. getReport()
+  }
+
+  getReport(){
+    this.dataservice.Reportattendancedatal(this.SummeryFromGroup.value).subscribe((res)=>{
+      console.log("report",res)
+    })
+  }
 }

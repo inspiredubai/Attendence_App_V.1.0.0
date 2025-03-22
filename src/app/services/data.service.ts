@@ -26,4 +26,7 @@ export class DataService {
 public attendancedatalistpost(data:any) {
   return this.httpClient.post<any>(this.baseUrl + 'Hr_AttendanceSheet/InsertHr_AttendanceSheet',data)
 }
+public Reportattendancedatal(data:any) {
+  return this.httpClient.post<any>(this.baseUrl + 'Hr_AttendanceSheet/Report_AttendanceSheet',data)
+}
 }
