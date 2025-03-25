@@ -156,15 +156,42 @@ ion-toolbar {
       align-items: center;
     }
     
+    // .wrapper {
+    //   width: 100%; /* Make sure the wrapper takes full width */
+    //   max-height: 80vh; /* Limit height for scrolling */
+    //   overflow-y: auto; /* Enable vertical scrolling */
+    //   -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    // }
+
     .wrapper {
-      width: 100%; /* Make sure the wrapper takes full width */
-      max-height: 80vh; /* Limit height for scrolling */
-      overflow-y: auto; /* Enable vertical scrolling */
-      -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+      padding: 10px;
     }
     
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3880ff; /* Primary Ionic Blue */
+      color: white;
+      padding: 5px 6px;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .header-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .close-button {
+      color: white;
+      font-size: 18px;
+    }
+    
+    /* Table Styling */
+      
     .table-container {
-      max-height: 70vh; /* Limit the table height */
+      max-height: 70vh; 
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -175,39 +202,13 @@ ion-toolbar {
     }
     
     .ion-table th, .ion-table td {
-      padding: 12px;
-      border: 1px solid #ddd;
+      padding: 10px;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
     
     .ion-table th {
       background-color: #f4f4f4;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-    .modal-content, .wrapper, .table-container, ion-content {
-      touch-action: auto;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between; /* Space between title and button */
-      align-items: center;
-      margin-bottom: 10px;
-      padding: 10px;
-    }
-    
-    .header-title {
-      margin: 0;
-      font-size: 1.4em;
       font-weight: bold;
     }
-    
-    .close-button {
-      font-size: 1.5em; /* Proper size for the button */
-      color: #000;
-    }
-    
     

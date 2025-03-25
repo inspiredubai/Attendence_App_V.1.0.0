@@ -133,8 +133,9 @@
     </div>
   </ng-template>
 </ion-modal> -->
-<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
-  <ion-content  class="modal-content">
+
+<!-- <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ion-content>
     <ng-template>
       <div class="wrapper">
         <div class="modal-header">
@@ -143,6 +144,42 @@
             <ion-icon slot="icon-only" name="close-outline"></ion-icon>
           </ion-button>
         </div>        
+        <div class="table-container">
+          <table class="ion-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Mode</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ListData">
+                <td>{{ item?.punchDate | date }}</td>
+                <td>{{ item?.punchMode == 'true' ? 'CheckOut' : 'CheckIn' }}</td>
+                <td>{{ item?.punchTime }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-template>
+  </ion-content>
+</ion-modal> -->
+
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ion-content>
+    <ng-template>
+      <div class="wrapper">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h1 class="header-title">Details</h1>
+          <ion-button fill="clear" class="close-button" (click)="modal.dismiss()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </div>
+
+        <!-- Table Container -->
         <div class="table-container">
           <table class="ion-table">
             <thead>
