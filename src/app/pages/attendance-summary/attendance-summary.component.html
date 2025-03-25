@@ -93,7 +93,8 @@
         <ion-col size="12" size-md="4">
         </ion-col>
         <ion-col size="12" size-md="3">
-          <ion-button expand="block" (click)="getReport()" id="open-custom-dialog" style="--background: var(--ion-color-custom-primary);">
+          <ion-button expand="block" (click)="getReport()" id="open-custom-dialog"
+            style="--background: var(--ion-color-custom-primary);">
             <ion-icon name="list-outline"></ion-icon> List
           </ion-button>
         </ion-col>
@@ -101,38 +102,66 @@
     </ion-grid>
   </ion-card>
 </ion-content>
- 
-  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+<!-- 
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ng-template>
+    <div class="wrapper">
+      <h1>Details</h1>
+      <table class="ion-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Mode</th>
+            <th>Time</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ListData">
+            <td>{{ item?.punchDate | date }}</td>
+            <td>{{ item?.punchMode == 'true' ? 'CheckOut' : 'CheckIn' }}</td>
+            <td>{{ item?.punchTime }}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr *ngFor="let item of ListData">
+            <td>{{ item?.punchDate | date }}</td>
+            <td>{{ item?.punchMode == true ? 'CheckOut' : 'CheckIn' }}</td>
+            <td>{{ item?.punchTime }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</ion-modal> -->
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ion-content  class="modal-content">
     <ng-template>
       <div class="wrapper">
-        <h1>Details</h1>
-        <table class="ion-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Mode</th>
-              <th>Time</th>
-              <!-- <th>Things</th> -->
-            </tr>
-          </thead>
-       <tbody>
-  <tr *ngFor="let item of ListData">
-    <td>{{ item?.punchDate | date }}</td>
-    <td>{{ item?.punchMode == 'true' ? 'CheckOut' : 'CheckIn' }}</td>
-    <td>{{ item?.punchTime }}</td>
-  </tr>     
-</tbody>
-<tbody>
-  <tr *ngFor="let item of ListData">
-    <td>{{ item?.punchDate | date }}</td>
-    <td>{{ item?.punchMode == true ? 'CheckOut' : 'CheckIn' }}</td>
-    <td>{{ item?.punchTime }}</td>
-  </tr>     
-</tbody>
-
-
-        </table>
+        <div class="modal-header">
+          <h1 class="header-title">Details</h1>
+          <ion-button fill="clear" class="close-button" (click)="modal.dismiss()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </div>        
+        <div class="table-container">
+          <table class="ion-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Mode</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ListData">
+                <td>{{ item?.punchDate | date }}</td>
+                <td>{{ item?.punchMode == 'true' ? 'CheckOut' : 'CheckIn' }}</td>
+                <td>{{ item?.punchTime }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </ng-template>
-  </ion-modal>
- 
+  </ion-content>
+</ion-modal>

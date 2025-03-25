@@ -148,8 +148,28 @@ ion-toolbar {
     ion-modal#example-modal .wrapper {
       margin-bottom: 10px;
     }  
+    .modal-content {
+      --height: 90%; /* Ensure the modal has enough height */
+      --max-height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .wrapper {
+      width: 100%; /* Make sure the wrapper takes full width */
+      max-height: 80vh; /* Limit height for scrolling */
+      overflow-y: auto; /* Enable vertical scrolling */
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    }
+    
+    .table-container {
+      max-height: 70vh; /* Limit the table height */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
     .ion-table {
-      margin-top: 20px;
       width: 100%;
       border-collapse: collapse;
     }
@@ -162,10 +182,32 @@ ion-toolbar {
     
     .ion-table th {
       background-color: #f4f4f4;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .modal-content, .wrapper, .table-container, ion-content {
+      touch-action: auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between; /* Space between title and button */
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    
+    .header-title {
+      margin: 0;
+      font-size: 1.4em;
       font-weight: bold;
     }
     
-    .ion-table tr:hover {
-      background-color: #f1f1f1;
+    .close-button {
+      font-size: 1.5em; /* Proper size for the button */
+      color: #000;
     }
+    
     
