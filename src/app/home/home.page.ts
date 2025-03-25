@@ -18,7 +18,7 @@ export class HomePage {
   markerPosition!: google.maps.LatLngLiteral;
   popoverOpen = false;
   popoverEvent: any = null;
-  attendanceFromGroup:any
+  attendanceFromGroup: any
   userDetails: any;
   receivedData: any;
   openPopover(event: Event) {
@@ -36,81 +36,81 @@ export class HomePage {
   }
 
   logout() {
-    localStorage.clear(); 
-    sessionStorage.clear();    
+    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
-   constructor(private router: Router,
+  constructor(private router: Router,
     private navCtrl: NavController
-    ,private fb: UntypedFormBuilder, 
-    private dataservice: DataService,private toastService: ToastService
-   ) {}
-   ngOnInit() {
-     this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
-       this.attendanceFromGroup = this.fb.group({
-         AttendanceID: [0, [Validators.required]],
-         AttendanceEmpID: [this.userDetails.userId],
-         ProjectID: [-1, [Validators.required]],
-         PunchDate: [new Date().toISOString().split('T')[0], [Validators.required]],
-         CheckOut:[null, [Validators.required]],
-         Latitude:[null, [Validators.required]],
-         Longitude:[null, [Validators.required]],
-         LocationName:[''],
-         ImageFile:[null],
-         Remarks:[null],
-         PunchMode:[false,],
-         PunchTime:[null],
-         Active:[false,],
-         });
-       //  this.datashow()
-       this.dataservice.data$.subscribe(data => {
-         this.receivedData = data;
-       });
-       if(this.receivedData==null){
-        this.getCurrentLocation()
-       }else{
-         this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
-         this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
-       } 
-     }     
-onCheckIn() {
-  this.getCurrentTime()
-  this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
-    if (res) {
-       this.toastService.presentToast('Check-In sucessfully');
-
-    }else{
-      this.toastService.presentToastErrror('Something went wrong');
+    , private fb: UntypedFormBuilder,
+    private dataservice: DataService, private toastService: ToastService
+  ) { }
+  ngOnInit() {
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
+    this.attendanceFromGroup = this.fb.group({
+      AttendanceID: [0, [Validators.required]],
+      AttendanceEmpID: [this.userDetails.userId],
+      ProjectID: [-1, [Validators.required]],
+      PunchDate: [new Date().toISOString().split('T')[0], [Validators.required]],
+      CheckOut: [null, [Validators.required]],
+      Latitude: [null, [Validators.required]],
+      Longitude: [null, [Validators.required]],
+      LocationName: [''],
+      ImageFile: [null],
+      Remarks: [null],
+      PunchMode: [false,],
+      PunchTime: [null],
+      Active: [false,],
+    });
+    //  this.datashow()
+    this.dataservice.data$.subscribe(data => {
+      this.receivedData = data;
+    });
+    if (this.receivedData == null) {
+      this.getCurrentLocation()
+    } else {
+      this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
+      this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
     }
-  })
+  }
+  onCheckIn() {
+    this.getCurrentTime()
+    this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res) => {
+      if (res) {
+        this.toastService.presentToast('Check-In sucessfully');
+
+      } else {
+        this.toastService.presentToastErrror('Something went wrong');
+      }
+    })
 
 
-}
+  }
 
-onCheckOut() {
-  this.getCurrentTime()
-  this.attendanceFromGroup.controls.PunchMode.setValue(true)
-  this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res)=>{
-    if (res) {
-       this.toastService.presentToast('Check-Out sucessfully');
+  onCheckOut() {
+    this.getCurrentTime()
+    this.attendanceFromGroup.controls.PunchMode.setValue(true)
+    this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res) => {
+      if (res) {
+        this.toastService.presentToast('Check-Out sucessfully');
 
-    }else{
-      this.toastService.presentToastErrror('Something went wrong');
-    }
-  })
-}
-onsmartpunch() {
-  this.router.navigate(['/smartpunch']);
-}
- onattendancesummary() {
-       this.router.navigate(['/attendancesummary']);
-   }
- 
+      } else {
+        this.toastService.presentToastErrror('Something went wrong');
+      }
+    })
+  }
+  onsmartpunch() {
+    this.router.navigate(['/smartpunch']);
+  }
+  onattendancesummary() {
+    this.router.navigate(['/attendancesummary']);
+  }
+
   //   this.router.navigate(['/attendancedetail'])
   //  }
 
 
-  
+
   async getCurrentLocation() {
     try {
       if (Capacitor.isNativePlatform()) {
@@ -123,8 +123,8 @@ onsmartpunch() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-          this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-         this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+        this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+        this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
         this.markerPosition = { ...this.center };
         console.log('Native Device Location:', this.center);
       }
@@ -135,8 +135,8 @@ onsmartpunch() {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             };
-               this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-               this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+            this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+            this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
             this.markerPosition = { ...this.center };
             console.log('Browser Location:', this.center);
           },
@@ -168,13 +168,13 @@ onsmartpunch() {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
       };
-         this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
-         this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
+      this.attendanceFromGroup.get('Latitude')?.setValue(this.center.lat.toString());
+      this.attendanceFromGroup.get('Longitude')?.setValue(this.center.lng.toString());
       this.dataservice.sendData(this.markerPosition);
       console.log('Updated Marker Position:', this.markerPosition);
     }
   }
-  getCurrentTime(){
+  getCurrentTime() {
     const currentTime = new Date();
     const formattedTime = currentTime.toLocaleTimeString('en-US', {
       hour: '2-digit',
