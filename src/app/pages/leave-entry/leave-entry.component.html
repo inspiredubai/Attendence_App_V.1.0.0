@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Inspire</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="color-palette-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="openPopover($event)">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Popover component -->
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
+        <ng-template>
+          <ion-list>
+            <ion-item (click)="selectOption('profile')">Profile</ion-item>
+            <ion-item (click)="selectOption('settings')">Settings</ion-item>
+            <ion-item (click)="selectOption('logout')">Logout</ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+
+
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-card no-margin style="width: 50%; margin-left: 25%; margin-top: 100px;">
+    <ion-card-header>
+      <ion-card-title><b>Leave Entry </b></ion-card-title>
+    </ion-card-header>
+       <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-label color="primary" position="floating">
+               From Date
+            </ion-label>
+            <ion-input type="date"  placeholder="Select Date" id="dateInput">
+            </ion-input>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item>
+ 
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-label color="primary" position="floating">
+               To Date
+            </ion-label>
+            <ion-input type="date" placeholder="Select Date" id="dateInput">
+            </ion-input>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-label color="primary"  position="floating">Remarks</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-label color="primary" position="floating">Leave Type</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+     <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+        </ion-col>
+        <ion-col size="12" size-md="3">
+          <ion-button expand="block"  id="open-custom-dialog"
+            style="--background: var(--ion-color-custom-primary);">
+              Submit
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

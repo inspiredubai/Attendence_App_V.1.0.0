@@ -105,7 +105,10 @@ export class HomePage {
   onattendancesummary() {
     this.router.navigate(['/attendancesummary']);
   }
+  onleaveEntry(){
+    this.router.navigate(['/leaveentry']);
 
+  }
   //   this.router.navigate(['/attendancedetail'])
   //  }
 

@@ -1,0 +1,214 @@
+ion-item {
+    width: 100%;
+    max-width: 400px; /* Prevents items from stretching too much */
+    margin: auto; /* Centers items */
+  }
+  
+  ion-card {
+    margin: 10px; /* Adds spacing */
+    top:50px;
+   }
+  
+  
+  @media (max-width: 768px) {
+    ion-grid {
+      padding: 0 10px;
+    }
+  
+    ion-card {
+      margin: 5px;
+    }
+  
+    ion-item {
+      max-width: 100%;
+    }
+  }
+  ion-toolbar {
+    --background: #3b57c1;
+    --color: white;
+  }
+  
+  .content-wrapper {
+    padding: 1em;
+  }
+  
+  .section-title {
+    color: #3b57c1;
+    font-size: 1.2em;
+    margin: 1em 0 0.5em 0;
+    font-weight: bold;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+  
+  ion-card.custom-card {
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  ion-card.custom-card:hover {
+    transform: scale(1.05);
+  }
+  
+  ion-card-content {
+    color: #3b57c1;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  ion-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  ion-icon {
+    color: white;
+    font-size: 1.2em;
+  }
+  
+  ion-toolbar {
+    --background: #f9f5f5;
+    --color: white;
+  
+    --border-color: #eeecee;
+    --border-width: 1px 0;
+    --border-style: double;
+  
+    // --min-height: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    }
+    ::ng-deep{
+       :root {
+        --ion-color-custom-primary: #007bff; /* Blue */
+        --ion-color-custom-success: #28a745; /* Green */
+        --ion-color-custom-danger: #dc3545; /* Red */
+        --ion-color-custom-warning: #ffc107; /* Yellow */
+      }
+       
+    }
+    ion-input {
+        cursor: pointer;
+      }
+      
+      ion-icon {
+        // margin-left: 8px;
+        cursor: pointer;
+      }
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+      }
+      
+      ion-checkbox {
+        margin-right: 8px;
+      }
+      ion-modal#example-modal {
+        --width: fit-content;
+        --min-width: 350px;
+        --height: fit-content;
+        --border-radius: 6px;
+        --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+        
+      }
+      
+      
+      ion-modal::part(content) {
+        --background: white; /* Modal background */
+      }
+      
+      ion-modal .wrapper h1 {
+        background-color: #3498db; /* Your desired color */
+        color: white; /* Text color */
+        padding: 10px;
+        margin: 0;
+        text-align: left;
+        border-radius: 1px 1px 0 0; /* Rounded top corners */
+      }
+      ion-modal#example-modal ion-icon {
+        margin-right: 6px;
+      
+        width: 48px;
+        height: 48px;
+      
+        padding: 4px 0;
+      
+        color: #aaaaaa;
+      }
+      
+      ion-modal#example-modal .wrapper {
+        margin-bottom: 10px;
+      }  
+      .modal-content {
+        --height: 90%; /* Ensure the modal has enough height */
+        --max-height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      // .wrapper {
+      //   width: 100%; /* Make sure the wrapper takes full width */
+      //   max-height: 80vh; /* Limit height for scrolling */
+      //   overflow-y: auto; /* Enable vertical scrolling */
+      //   -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+      // }
+  
+      .wrapper {
+        padding: 10px;
+      }
+      
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #3880ff; /* Primary Ionic Blue */
+        color: white;
+        padding: 5px 6px;
+        border-radius: 8px 8px 0 0;
+      }
+      
+      .header-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+      }
+      
+      .close-button {
+        color: white;
+        font-size: 18px;
+      }
+      
+      /* Table Styling */
+        
+      .table-container {
+        max-height: 70vh; 
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .ion-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      
+      .ion-table th, .ion-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      .ion-table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+      

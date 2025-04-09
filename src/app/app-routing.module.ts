@@ -6,6 +6,7 @@ import { AttendanceSummaryComponent } from './pages/attendance-summary/attendanc
 import { SmartPunchComponent } from './pages/smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './pages/attendance-detail/attendance-detail.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { LeaveEntryComponent } from './pages/leave-entry/leave-entry.component';
 
 const routes: Routes = [
    
@@ -43,9 +44,14 @@ const routes: Routes = [
       component: SmartPunchComponent
     },
       {
+        path: 'leaveentry',
+        component:  LeaveEntryComponent
+      },
+      {
         path: 'attendancedetail',
         component:  AttendanceDetailComponent
       }
+
 ];
 
 @NgModule({
