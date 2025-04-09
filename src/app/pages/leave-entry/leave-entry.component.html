@@ -95,12 +95,72 @@
         <ion-col size="12" size-md="4">
         </ion-col>
         <ion-col size="12" size-md="3">
-          <ion-button expand="block"  id="open-custom-dialog"
+          <ion-button expand="block" 
             style="--background: var(--ion-color-custom-primary);"(click)="submit()">
               Submit
           </ion-button>
+        </ion-col>
+        <ion-col size="12" size-md="3">
+          <ion-button expand="block" style="--background: var(--ion-color-custom-primary);"
+           (click)="setOpen(true)">Open</ion-button>
+
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 </ion-content>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Modal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">List</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="table-container">
+          <table class="ion-table">
+            <thead>
+              <tr>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Leave No</th>
+                <th>Leave Type</th>
+                <th>Remakrs</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr> 
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr> 
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr> 
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+ 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-leave-entry',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 
 })
 export class LeaveEntryComponent  implements OnInit {
+ 
   popoverOpen = false;
   popoverEvent: any = null;
   leaveEntryFromGroup:any;
@@ -20,7 +22,12 @@ export class LeaveEntryComponent  implements OnInit {
     { label: 'Maternity Leave', value: 'maternity' },
     { label: 'Paternity Leave', value: 'paternity' }
   ];
-  
+  isModalOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+ 
   constructor(  
      private router: Router,
      private fb: UntypedFormBuilder,

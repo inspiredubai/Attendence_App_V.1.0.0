@@ -19,7 +19,9 @@ import { LeaveEntryComponent } from './leave-entry/leave-entry.component';
     PageRoutingModule,
      ReactiveFormsModule,
         HttpClientModule,
-        GoogleMapsModule
+        GoogleMapsModule,
+        IonicModule.forRoot(),
+
     ],
   declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent,CheckoutComponent,LeaveEntryComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
