@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-leave-entry',
@@ -11,26 +12,34 @@ import { IonModal } from '@ionic/angular';
 
 })
 export class LeaveEntryComponent  implements OnInit {
- 
+  // leaves = [
+  //   {
+  //     fromDate: '01-Jan',
+  //     toDate: '02-Jan',
+  //     leaveNo: '001',
+  //     leaveType: 'Sick',
+  //     remarks: 'Flu',
+  //     time: 'Full Day'
+  //   },
+
+  // ];
+  leaves:any
   popoverOpen = false;
   popoverEvent: any = null;
   leaveEntryFromGroup:any;
-  leaveTypes = [
-    { label: 'Casual Leave', value: 'casual' },
-    { label: 'Sick Leave', value: 'sick' },
-    { label: 'Earned Leave', value: 'earned' },
-    { label: 'Maternity Leave', value: 'maternity' },
-    { label: 'Paternity Leave', value: 'paternity' }
-  ];
   isModalOpen = false;
+  leavetypeArray: any;
+  leavetypeList: any;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+    this.GetAlLeaveRequest();
   }
  
   constructor(  
      private router: Router,
      private fb: UntypedFormBuilder,
+     private dataservice:DataService
      
 
   ) { }
@@ -60,10 +69,53 @@ export class LeaveEntryComponent  implements OnInit {
       remarks: [null],
       leaveType: [null,],
             })
+            this.GetAlLeaveRequest()
+            this.GetAllHrLeaveType()
   }
   submit(){
-    console.log("formvalue",this.leaveEntryFromGroup.value)
+    let payload={
+       LeavDataId :0,
+       LeaveEmpid :this.leaveEntryFromGroup.get('leaveType')?.value,
+       LeaveDataType  :null,
+       LeaveDataFrom : this.leaveEntryFromGroup.get('fromDate')?.value,
+       LeaveDataTo : this.leaveEntryFromGroup.get('toDate')?.value,
+       LeaveDays  :null,
+       LeaveDataReason :null, 
+       ReqDate  :null,
+       ApproveDate :null, 
+       ApprovedBy  :null, 
+       RejectedDate  :null, 
+       RejectedBy  :null, 
+       Remarks : this.leaveEntryFromGroup.get('remarks')?.value,
+       Status  :null, 
+      AppStatus  :null, 
+      LeaveReqImage  :null, 
+      LeaveDataTypeNavigation:null,
+      LeaveEmp :null,   
+    }
+    this.dataservice.InserLeaveRequest(payload).subscribe((res)=>{
+    })
   }
-          
+  GetAlLeaveRequest(){
+    this.dataservice.GetAlLeaveRequest().subscribe((res)=>{
+      if(res)
+      this.leaves=res
+      this.GetAlLeaveRequest();
+    })
+  }
+  GetAllHrLeaveType(){
+    this.dataservice.GetAllHrLeaveType().subscribe((res)=>{
+      this.leavetypeArray = res;
+      this.leavetypeList = this.leavetypeArray.map((kl: any) => ({
+        label: kl.leaveType,
+        value: kl.leaveTypeId,
+      }));
+
+    })
+
+  }
+getleaveTypeById(id:any){
+ return this.leavetypeList.find((res:any)=>res.value==id)?.label;
+}
 
 }

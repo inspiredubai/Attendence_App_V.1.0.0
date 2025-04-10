@@ -144,4 +144,114 @@ ion-item {
       .ion-table th {
         background-color: #f4f4f4;
       }
+
+      .table-wrapper {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      
+      .scrollable-table {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: auto;
+      }
+      
+      .ion-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      
+      .ion-table th, .ion-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+        background-color: #fff;
+      }
+      
+      .ion-table th {
+        position: sticky;
+        top: 0;
+        background-color: var(--ion-color-primary);
+        color: #fff;
+        z-index: 10;
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+      }
+      
+      .ion-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      .ion-table tr:hover {
+        background-color: #f1f1f1;
+      }
+      
+
+
+
+ion-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.table-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.scrollable-table {
+  overflow-x: auto;  /* enables horizontal scroll */
+  overflow-y: auto;  /* enables vertical scroll */
+  max-height: 100%;
+  border: 1px solid #ddd;
+}
+
+.ion-table {
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%; /* ensure table fills container */
+}
+
+.ion-table th,
+.ion-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  white-space: nowrap; /* prevents text from wrapping */
+  text-align: left;
+  font-size: 14px;
+}
+.leave-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 60px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-title {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--ion-color-primary);
+}
+
+ion-item {
+  --highlight-color-focused: var(--ion-color-primary);
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+  --background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+ion-button {
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
       

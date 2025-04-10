@@ -29,4 +29,13 @@ public attendancedatalistpost(data:any) {
 public Reportattendancedatal(data:any) {
   return this.httpClient.post<any>(this.baseUrl + 'Hr_AttendanceSheet/Report_AttendanceSheet',data)
 }
+public GetAlLeaveRequest() {
+  return this.httpClient.get<any>(this.baseUrl + 'LeaveData/GetAlLeaveRequest',)
+}
+public InserLeaveRequest(data:any) {
+  return this.httpClient.post<any>(this.baseUrl + 'LeaveData/InserLeaveRequest',data)
+}
+public GetAllHrLeaveType() {
+  return this.httpClient.get<any>(this.baseUrl + 'HrLeaveType/GetAllHrLeaveType',)
+}
 }
