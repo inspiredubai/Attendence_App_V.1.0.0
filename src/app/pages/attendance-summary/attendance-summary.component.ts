@@ -12,18 +12,18 @@ import { ToastService } from 'src/app/services/toast.service';
   standalone: false,
 
 })
-export class AttendanceSummaryComponent  implements OnInit {
+export class AttendanceSummaryComponent implements OnInit {
   popoverOpen = false;
   popoverEvent: any = null;
-  SummeryFromGroup:any;
+  SummeryFromGroup: any;
   ListData: any;
   fromdate: Date | undefined;
   enddate: Date | undefined;
   constructor(private navCtrl: NavController,
-              private router: Router,
-              private fb: UntypedFormBuilder, 
-              private dataservice: DataService,private toastService: ToastService
-            ) {}
+    private router: Router,
+    private fb: UntypedFormBuilder,
+    private dataservice: DataService, private toastService: ToastService
+  ) { }
 
   openPopover(event: Event) {
     this.popoverEvent = event;
@@ -40,34 +40,34 @@ export class AttendanceSummaryComponent  implements OnInit {
   }
 
   logout() {
-    localStorage.clear(); 
+    localStorage.clear();
     sessionStorage.clear();
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
 
   ngOnInit() {
 
-  this.SummeryFromGroup = this.fb.group({
-    
-    FromDate: [new Date()],
-    ToDate: [new Date()],
+    this.SummeryFromGroup = this.fb.group({
 
-      
-         });
+      FromDate: [new Date()],
+      ToDate: [new Date()],
+
+
+    });
   }
 
   getReport() {
     const fromDate = this.SummeryFromGroup.get('FromDate')?.value || "01-01-1900";
     const toDate = this.SummeryFromGroup.get('ToDate')?.value || "01-01-1900";
-  
+
     let payload = {
       FromDate: fromDate,
       ToDate: toDate
     };
-  
+
     this.dataservice.Reportattendancedatal(payload).subscribe((res) => {
       this.ListData = res;
     });
   }
-  
+
 }
