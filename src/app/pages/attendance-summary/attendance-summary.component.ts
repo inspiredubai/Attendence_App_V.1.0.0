@@ -48,14 +48,20 @@ export class AttendanceSummaryComponent implements OnInit {
   ngOnInit() {
 
     this.SummeryFromGroup = this.fb.group({
-
-      FromDate: [new Date()],
-      ToDate: [new Date()],
+      FromDate: [this.getTodayDateString()],
+      ToDate: [this.getTodayDateString()],
 
 
     });
   }
-
+  getTodayDateString(): string {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  
   getReport() {
     const fromDate = this.SummeryFromGroup.get('FromDate')?.value || "01-01-1900";
     const toDate = this.SummeryFromGroup.get('ToDate')?.value || "01-01-1900";
