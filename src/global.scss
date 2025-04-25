@@ -34,7 +34,19 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/default.system.css";
+:root {
+  --ion-color-primary: #3880ff;
+  --ion-color-secondary: #0cd1e8;
+  --ion-color-tertiary: #7044ff;
+  /* Add more light colors here */
+}
+// body.dark {
+//   --ion-color-primary: #222428;
+//   --ion-color-secondary: #3dc2ff;
+//   --ion-color-tertiary: #5260ff;
+//   /* Add more dark colors here */
+// }
 .custom-toast {
     --width: auto;
     --max-width: 250px;
