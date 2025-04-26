@@ -11,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
   standalone: false,
 
 })
-export class LeaveEntryComponent  implements OnInit {
+export class LeaveEntryComponent implements OnInit {
   // leaves = [
   //   {
   //     fromDate: '01-Jan',
@@ -23,10 +23,10 @@ export class LeaveEntryComponent  implements OnInit {
   //   },
 
   // ];
-  leaves:any
+  leaves: any
   popoverOpen = false;
   popoverEvent: any = null;
-  leaveEntryFromGroup:any;
+  leaveEntryFromGroup: any;
   isModalOpen = false;
   leavetypeArray: any;
   leavetypeList: any;
@@ -35,12 +35,12 @@ export class LeaveEntryComponent  implements OnInit {
     this.isModalOpen = isOpen;
     this.GetAlLeaveRequest();
   }
- 
-  constructor(  
-     private router: Router,
-     private fb: UntypedFormBuilder,
-     private dataservice:DataService
-     
+
+  constructor(
+    private router: Router,
+    private fb: UntypedFormBuilder,
+    private dataservice: DataService
+
 
   ) { }
   openPopover(event: Event) {
@@ -56,57 +56,57 @@ export class LeaveEntryComponent  implements OnInit {
       this.logout();
     }
   }
- 
+
   logout() {
-    localStorage.clear(); 
+    localStorage.clear();
     sessionStorage.clear();
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
   ngOnInit() {
-     this.leaveEntryFromGroup = this.fb.group({
+    this.leaveEntryFromGroup = this.fb.group({
       // fromDate : [null, [Validators.required]],
       // toDate: [null, [Validators.required]],
       fromDate: [this.getTodayDateString()],
       toDate: [this.getTodayDateString()],
       remarks: [null],
       leaveType: [null,],
-            })
-            this.GetAlLeaveRequest()
-            this.GetAllHrLeaveType()
+    })
+    this.GetAlLeaveRequest()
+    this.GetAllHrLeaveType()
   }
-  submit(){
-    let payload={
-       LeavDataId :0,
-       LeaveEmpid :this.leaveEntryFromGroup.get('leaveType')?.value,
-       LeaveDataType  :null,
-       LeaveDataFrom : this.leaveEntryFromGroup.get('fromDate')?.value,
-       LeaveDataTo : this.leaveEntryFromGroup.get('toDate')?.value,
-       LeaveDays  :null,
-       LeaveDataReason :null, 
-       ReqDate  :null,
-       ApproveDate :null, 
-       ApprovedBy  :null, 
-       RejectedDate  :null, 
-       RejectedBy  :null, 
-       Remarks : this.leaveEntryFromGroup.get('remarks')?.value,
-       Status  :null, 
-      AppStatus  :null, 
-      LeaveReqImage  :null, 
-      LeaveDataTypeNavigation:null,
-      LeaveEmp :null,   
+  submit() {
+    let payload = {
+      LeavDataId: 0,
+      LeaveEmpid: this.leaveEntryFromGroup.get('leaveType')?.value,
+      LeaveDataType: null,
+      LeaveDataFrom: this.leaveEntryFromGroup.get('fromDate')?.value,
+      LeaveDataTo: this.leaveEntryFromGroup.get('toDate')?.value,
+      LeaveDays: null,
+      LeaveDataReason: null,
+      ReqDate: null,
+      ApproveDate: null,
+      ApprovedBy: null,
+      RejectedDate: null,
+      RejectedBy: null,
+      Remarks: this.leaveEntryFromGroup.get('remarks')?.value,
+      Status: null,
+      AppStatus: null,
+      LeaveReqImage: null,
+      LeaveDataTypeNavigation: null,
+      LeaveEmp: null,
     }
-    this.dataservice.InserLeaveRequest(payload).subscribe((res)=>{
+    this.dataservice.InserLeaveRequest(payload).subscribe((res) => {
     })
   }
-  GetAlLeaveRequest(){
-    this.dataservice.GetAlLeaveRequest().subscribe((res)=>{
-      if(res)
-      this.leaves=res
+  GetAlLeaveRequest() {
+    this.dataservice.GetAlLeaveRequest().subscribe((res) => {
+      if (res)
+        this.leaves = res
       this.GetAlLeaveRequest();
     })
   }
-  GetAllHrLeaveType(){
-    this.dataservice.GetAllHrLeaveType().subscribe((res)=>{
+  GetAllHrLeaveType() {
+    this.dataservice.GetAllHrLeaveType().subscribe((res) => {
       this.leavetypeArray = res;
       this.leavetypeList = this.leavetypeArray.map((kl: any) => ({
         label: kl.leaveType,
@@ -123,9 +123,9 @@ export class LeaveEntryComponent  implements OnInit {
     const dd = String(today.getDate()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd}`;
   }
-  
-getleaveTypeById(id:any){
- return this.leavetypeList.find((res:any)=>res.value==id)?.label;
-}
+
+  getleaveTypeById(id: any) {
+    return this.leavetypeList.find((res: any) => res.value == id)?.label;
+  }
 
 }
