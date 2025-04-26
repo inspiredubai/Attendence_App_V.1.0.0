@@ -84,22 +84,65 @@ export class SmartPunchComponent implements OnInit {
     this.getCurrentLocation();
   }
 
+  // async getCurrentLocation() {
+  //   try {
+  //     if (Capacitor.isNativePlatform()) {
+  //       const position = await Geolocation.getCurrentPosition({
+  //         enableHighAccuracy: true,
+  //         timeout: 10000,
+  //         maximumAge: 0,
+  //       });
+  //       this.center = {
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       };
+  //       this.markerPosition = { ...this.center };
+  //       console.log('Native Device Location:', this.center);
+  //     }
+  //     else {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           this.center = {
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude,
+  //           };
+  //           this.markerPosition = { ...this.center };
+  //           console.log('Browser Location:', this.center);
+  //         },
+  //         (error) => {
+  //           console.error('Browser Geolocation Error:', error);
+  //           this.setDefaultLocation();
+  //         },
+  //         {
+  //           enableHighAccuracy: true,
+  //           timeout: 10000,
+  //           maximumAge: 0,
+  //         }
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('Error getting location:', error);
+  //     this.setDefaultLocation();
+  //   }
+  // }
   async getCurrentLocation() {
     try {
       if (Capacitor.isNativePlatform()) {
+        await Geolocation.requestPermissions(); 
+  
         const position = await Geolocation.getCurrentPosition({
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0,
         });
+  
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
         this.markerPosition = { ...this.center };
         console.log('Native Device Location:', this.center);
-      }
-      else {
+      } else {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             this.center = {
@@ -125,6 +168,7 @@ export class SmartPunchComponent implements OnInit {
       this.setDefaultLocation();
     }
   }
+  
 
   setDefaultLocation() {
     this.center = { lat: 31.4933248, lng: 74.3079936 };

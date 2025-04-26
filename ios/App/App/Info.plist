@@ -51,5 +51,11 @@
 		<true/>
 	</dict>
 
+	<!-- 🚀 Added Location Permission keys below -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show your current position on the map.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We require your location access to enhance your app experience.</string>
+
 </dict>
 </plist>
