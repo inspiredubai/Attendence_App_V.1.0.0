@@ -72,7 +72,7 @@ export class LeaveEntryComponent  implements OnInit {
       leaveType: [null,],
             })
             this.GetAlLeaveRequest()
-            this.GetAllHrLeaveType()
+           this.GetAllHrLeaveType()
   }
   submit(){
     let payload={
@@ -102,7 +102,7 @@ export class LeaveEntryComponent  implements OnInit {
     this.dataservice.GetAlLeaveRequest().subscribe((res)=>{
       if(res)
       this.leaves=res
-      this.GetAlLeaveRequest();
+    //  this.GetAlLeaveRequest();
     })
   }
   GetAllHrLeaveType(){
