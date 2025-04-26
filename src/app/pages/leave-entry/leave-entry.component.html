@@ -21,7 +21,7 @@
 
 
 
-      
+
       <!-- Popover component -->
       <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
         <ng-template>
@@ -38,7 +38,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
- 
+
 <ion-content fullscreen>
   <div class="table-wrapper">
     <div class="scrollable-table">
@@ -59,7 +59,7 @@
             <td>{{ i+1 }}</td>
 
             <td>{{ leave.leaveDataFrom | date }}</td>
-            <td>{{ leave.leaveDataTo  | date }}</td>
+            <td>{{ leave.leaveDataTo | date }}</td>
             <!-- <td>{{ leave.leaveNo }}</td> -->
             <td>{{ getleaveTypeById(leave.leaveEmpid) }}</td>
             <td>{{ leave.remarks }}</td>
@@ -72,77 +72,77 @@
 </ion-content>
 
 
-  <ion-modal [isOpen]="isModalOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Leave Entry</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)">Close</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-card class="leave-card" [formGroup]="leaveEntryFromGroup"  style="width: 90%; margin-left:5%; margin-top: 10px;">
-          <ion-card-header>
-            <ion-card-title class="text-center">
-              <b>Leave Entry</b>
-            </ion-card-title>
-          </ion-card-header>
-      
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col size="12" size-md="6">
-                  <ion-item lines="full">
-                    <ion-label position="floating" color="primary">From Date</ion-label>
-                    <ion-input type="date" formControlName="fromDate"></ion-input>
-                    <ion-icon name="calendar-outline" slot="end"></ion-icon>
-                  </ion-item>
-                </ion-col>
-      
-                <ion-col size="12" size-md="6">
-                  <ion-item lines="full">
-                    <ion-label position="floating" color="primary">To Date</ion-label>
-                    <ion-input type="date" formControlName="toDate"></ion-input>
-                    <ion-icon name="calendar-outline" slot="end"></ion-icon>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-      
-              <ion-row>
-      
-                <ion-col size="12" size-md="6">
-                  <ion-item lines="full">
-                    <ion-label position="floating" color="primary">Leave Type</ion-label>
-                    <ion-select formControlName="leaveType" interface="popover">
-                      <ion-select-option *ngFor="let type of leavetypeList" [value]="type.value">
-                        {{ type.label }}
-                      </ion-select-option>
-                    </ion-select>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Leave Entry</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-card class="leave-card" [formGroup]="leaveEntryFromGroup"
+        style="width: 90%; margin-left:5%; margin-top: 10px;">
+        <ion-card-header>
+          <ion-card-title class="text-center">
+            <b>Leave Entry</b>
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="6">
+                <ion-item lines="full">
+                  <ion-label position="floating" color="primary">From Date</ion-label>
+                  <ion-input type="date" formControlName="fromDate"></ion-input>
+                  <ion-icon name="calendar-outline" slot="end"></ion-icon>
+                </ion-item>
+              </ion-col>
 
               <ion-col size="12" size-md="6">
+                <ion-item lines="full">
+                  <ion-label position="floating" color="primary">To Date</ion-label>
+                  <ion-input type="date" formControlName="toDate"></ion-input>
+                  <ion-icon name="calendar-outline" slot="end"></ion-icon>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="12" size-md="12">
+                <ion-item lines="full">
+                  <ion-label position="floating" color="primary">Leave Type</ion-label>
+                  <ion-select formControlName="leaveType" interface="popover">
+                    <ion-select-option *ngFor="let type of leavetypeList" [value]="type.value">
+                      {{ type.label }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12" size-md="12">
                 <ion-item lines="full">
                   <ion-label position="floating" color="primary">Remarks</ion-label>
                   <ion-input type="text" formControlName="remarks"></ion-input>
                 </ion-item>
               </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-margin-top">
+              <ion-col size="12" size-md="4">
+                <ion-button expand="block" color="primary" (click)="submit()">
+                  Submit
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
 
-              <ion-row class="ion-justify-content-center ion-margin-top">
-                <ion-col size="12" size-md="4">
-                  <ion-button expand="block" color="primary" (click)="submit()">
-                    Submit
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-content>
-      
-    </ng-template>
-  </ion-modal>
- 
+  </ng-template>
+</ion-modal>

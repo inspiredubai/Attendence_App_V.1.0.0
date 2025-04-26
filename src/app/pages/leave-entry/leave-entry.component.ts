@@ -64,8 +64,10 @@ export class LeaveEntryComponent  implements OnInit {
   }
   ngOnInit() {
      this.leaveEntryFromGroup = this.fb.group({
-      fromDate : [null, [Validators.required]],
-      toDate: [null, [Validators.required]],
+      // fromDate : [null, [Validators.required]],
+      // toDate: [null, [Validators.required]],
+      fromDate: [this.getTodayDateString()],
+      toDate: [this.getTodayDateString()],
       remarks: [null],
       leaveType: [null,],
             })
@@ -114,6 +116,14 @@ export class LeaveEntryComponent  implements OnInit {
     })
 
   }
+  getTodayDateString(): string {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  
 getleaveTypeById(id:any){
  return this.leavetypeList.find((res:any)=>res.value==id)?.label;
 }
