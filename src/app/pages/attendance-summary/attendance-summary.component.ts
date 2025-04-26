@@ -49,10 +49,8 @@ export class AttendanceSummaryComponent implements OnInit {
 
     this.SummeryFromGroup = this.fb.group({
 
-      FromDate: [new Date()],
+      FromDate: [new Date()],      
       ToDate: [new Date()],
-
-
     });
   }
 
