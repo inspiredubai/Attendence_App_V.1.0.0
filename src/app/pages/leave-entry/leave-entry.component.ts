@@ -102,7 +102,6 @@ export class LeaveEntryComponent implements OnInit {
     this.dataservice.GetAlLeaveRequest().subscribe((res) => {
       if (res)
         this.leaves = res
-      this.GetAlLeaveRequest();
     })
   }
   GetAllHrLeaveType() {
