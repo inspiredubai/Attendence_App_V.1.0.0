@@ -75,6 +75,7 @@ export class HomePage {
   }
   onCheckIn() {
     this.getCurrentTime()
+ console.log("aa"  , this.attendanceFromGroup.value);
     this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res) => {
       if (res) {
         this.toastService.presentToast('Check-In sucessfully');
