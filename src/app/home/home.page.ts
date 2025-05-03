@@ -21,6 +21,7 @@ export class HomePage {
   attendanceFromGroup: any
   userDetails: any;
   receivedData: any;
+  isCheckedIn: boolean = false;
   openPopover(event: Event) {
     this.popoverEvent = event;
     this.popoverOpen = true;
@@ -75,9 +76,9 @@ export class HomePage {
   }
   onCheckIn() {
     this.getCurrentTime()
- console.log("aa"  , this.attendanceFromGroup.value);
     this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res) => {
       if (res) {
+        this.isCheckedIn = true;
         this.toastService.presentToast('Check-In sucessfully');
 
       } else {
@@ -93,6 +94,7 @@ export class HomePage {
     this.attendanceFromGroup.controls.PunchMode.setValue(true)
     this.dataservice.attendancedatalistpost(this.attendanceFromGroup.value).subscribe((res) => {
       if (res) {
+        this.isCheckedIn = false;
         this.toastService.presentToast('Check-Out sucessfully');
 
       } else {
