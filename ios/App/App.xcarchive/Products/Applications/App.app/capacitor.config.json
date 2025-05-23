@@ -1,0 +1,19 @@
+{
+	"appId": "com.AttendanceApps",
+	"appName": "Mercury-Att",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "http",
+		"cleartext": true,
+		"allowNavigation": [
+			"http://103.74.54.207:8092/api/*"
+		]
+	},
+	"packageClassList": [
+		"AppPlugin",
+		"GeolocationPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin"
+	]
+}

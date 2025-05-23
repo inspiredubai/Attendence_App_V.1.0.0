@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.attendance.app_v.1,0',
+  appId: 'com.AttendanceApps',
   appName: 'Mercury-Att',
   webDir: 'www',
   server:{
