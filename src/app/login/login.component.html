@@ -1,5 +1,5 @@
   
-<ion-content [fullscreen]="true">
+<!-- <ion-content [fullscreen]="true">
   <ion-content class="login-page"  [formGroup]='loginForm'>
     <div class="login-wrapper">
       <ion-card class="login-card">
@@ -20,12 +20,63 @@
             <ion-spinner *ngIf="isLoading"></ion-spinner>
           </ion-button>
           
-          <!-- <p class="signup-link">
-            Don't have an account? <a href="#">Sign Up</a>
-          </p> -->
+          
         </ion-card-content>
       </ion-card>
     </div>
   </ion-content>
   
-</ion-content>
+</ion-content> -->
+
+
+<ion-content>
+
+<ion-grid class="grid1">
+<ion-row class="row1">
+  <!-- <ion-col class="img-container">
+    <img src="assets/img/loged.jpg" alt="Logo" />
+  </ion-col> -->
+</ion-row>
+
+    <!-- <ion-row class="row1">
+        <ion-col>
+
+        </ion-col>
+    </ion-row> -->
+
+    <ion-row class="row2">
+        <ion-col>
+
+        </ion-col>
+    </ion-row>
+
+</ion-grid>
+
+<ion-slide>
+  <div class="container-login">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="10" size-md="8" size-lg="8" size-xl="6">
+          <div class="login-box">
+            <h1 class="ion-text-center">Login</h1>
+            <ion-list>
+              <ion-item>
+                <ion-icon name="person" slot="start" class="icon-login"></ion-icon>
+                <ion-input name="user" type="text" placeholder="User Name" required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="lock-closed" slot="start" class="icon-login"></ion-icon>
+                <ion-input name="password" type="password" placeholder="Password" required></ion-input>
+              </ion-item>
+            </ion-list>
+
+            <ion-button type="submit" expand="block" class="ion-margin-top">
+              Enter
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-slide>

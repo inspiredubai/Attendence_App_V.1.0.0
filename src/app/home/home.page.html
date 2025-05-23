@@ -71,7 +71,7 @@
 
   </div>
 </ion-content> -->
-<ion-content>
+<!-- <ion-content>
   <ion-card no-margin>
     <ion-card-header>
       <ion-card-title><b>Smart Punch</b></ion-card-title>
@@ -112,4 +112,31 @@
 
     </div>
   </ion-card>
+</ion-content> -->
+ 
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center"><b>Smart Punch</b></ion-card-title>
+    </ion-card-header>
+    <ion-grid>
+      <ion-row class="ion-justify-content-start ion-align-items-stretch">
+        <ng-container *ngFor="let item of cardItems">
+          <ion-col
+            size="12"
+            size-sm="6"
+            size-md="4"
+            size-lg="3"
+            class="ion-padding">
+            <ion-card class="custom-card" 
+                      [class.disabled]="item.disabled"
+                      (click)="!item.disabled && item.action()">
+              <ion-card-content class="ion-text-center">{{ item.label }}</ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
+

@@ -22,6 +22,34 @@ export class HomePage {
   userDetails: any;
   receivedData: any;
   isCheckedIn: boolean = false;
+  cardItems = [
+  {
+    label: 'Check In',
+    action: () => this.onCheckIn(),
+    disabled: this.isCheckedIn
+  },
+  {
+    label: 'Check Out',
+    action: () => this.onCheckOut(),
+    disabled: !this.isCheckedIn
+  },
+  {
+    label: 'Attendance Summary',
+    action: () => this.onattendancesummary(),
+    disabled: false
+  },
+  {
+    label: 'Leave Entry',
+    action: () => this.onleaveEntry(),
+    disabled: false
+  },
+  {
+    label: 'SMART PUNCH - ONE TO ONE',
+    action: () => this.onsmartpunch(),
+    disabled: false
+  }
+];
+
   openPopover(event: Event) {
     this.popoverEvent = event;
     this.popoverOpen = true;
