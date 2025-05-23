@@ -7,7 +7,8 @@ export const environment = {
   // googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
   // crystalReportUrl: 'http://103.74.54.207:8104/api/',
   // reportApiUrl: 'http://103.74.54.207:8585/api/',
- // apiRootURL: 'http://localhost:5001/api/',
-   apiRootURL:'http://103.74.54.207:8092/api/'
+ //apiRootURL: 'http://localhost:5001/api/',
+  // apiRootURL:'http://103.74.54.207:8092/api/'
+   apiRootURL: 'http://103.74.54.207:8032/api/',
 };
 
