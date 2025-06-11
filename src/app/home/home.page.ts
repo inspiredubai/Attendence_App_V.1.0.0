@@ -22,33 +22,33 @@ export class HomePage {
   userDetails: any;
   receivedData: any;
   isCheckedIn: boolean = false;
-  cardItems = [
-  {
-    label: 'Check In',
-    action: () => this.onCheckIn(),
-    disabled: this.isCheckedIn
-  },
-  {
-    label: 'Check Out',
-    action: () => this.onCheckOut(),
-    disabled: !this.isCheckedIn
-  },
-  {
-    label: 'Attendance Summary',
-    action: () => this.onattendancesummary(),
-    disabled: false
-  },
-  {
-    label: 'Leave Entry',
-    action: () => this.onleaveEntry(),
-    disabled: false
-  },
-  {
-    label: 'SMART PUNCH - ONE TO ONE',
-    action: () => this.onsmartpunch(),
-    disabled: false
-  }
-];
+//   cardItems = [
+//   {
+//     label: 'Check In',
+//     action: () => this.onCheckIn(),
+//     disabled: this.isCheckedIn
+//   },
+//   {
+//     label: 'Check Out',
+//     action: () => this.onCheckOut(),
+//     disabled: !this.isCheckedIn
+//   },
+//   {
+//     label: 'Attendance Summary',
+//     action: () => this.onattendancesummary(),
+//     disabled: false
+//   },
+//   {
+//     label: 'Leave Entry',
+//     action: () => this.onleaveEntry(),
+//     disabled: false
+//   },
+//   {
+//     label: 'SMART PUNCH - ONE TO ONE',
+//     action: () => this.onsmartpunch(),
+//     disabled: false
+//   }
+// ];
 
   openPopover(event: Event) {
     this.popoverEvent = event;
@@ -101,6 +101,35 @@ export class HomePage {
       this.attendanceFromGroup.get('Latitude')?.setValue(this.receivedData.lat.toString());
       this.attendanceFromGroup.get('Longitude')?.setValue(this.receivedData.lng.toString());
     }
+  }
+   get cardItems() {
+    return [
+      {
+        label: 'Check In',
+        action: () => this.onCheckIn(),
+        disabled: this.isCheckedIn
+      },
+      {
+        label: 'Check Out',
+        action: () => this.onCheckOut(),
+        disabled: !this.isCheckedIn
+      },
+      {
+        label: 'Attendance Summary',
+        action: () => this.onattendancesummary(),
+        disabled: false
+      },
+      {
+        label: 'Leave Entry',
+        action: () => this.onleaveEntry(),
+        disabled: false
+      },
+      {
+        label: 'SMART PUNCH - ONE TO ONE',
+        action: () => this.onsmartpunch(),
+        disabled: false
+      }
+    ];
   }
   onCheckIn() {
     this.getCurrentTime()
