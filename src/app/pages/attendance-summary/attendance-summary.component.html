@@ -192,7 +192,7 @@
             <tbody>
               <tr *ngFor="let item of ListData">
                 <td>{{ item?.punchDate | date }}</td>
-                <td>{{ item?.punchMode == 'true' ? 'CheckOut' : 'CheckIn' }}</td>
+                <td>{{ item?.punchMode == true ? 'CheckOut' : 'CheckIn' }}</td>
                 <td>{{ item?.punchTime }}</td>
               </tr>
             </tbody>
