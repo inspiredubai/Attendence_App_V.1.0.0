@@ -11,6 +11,7 @@ const config: CapacitorConfig = {
       'http://103.74.54.207:8032/api/*'
     ]
   }
+  
 };
 
 export default config;
