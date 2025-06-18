@@ -63,15 +63,21 @@
 
   <!-- ✅ Location Permissions -->
   <key>NSLocationWhenInUseUsageDescription</key>
-  <string>This app needs access to your location to record attendance.</string>
+  <string>This app requires your location to record attendance while using the app.</string>
 
   <key>NSLocationAlwaysUsageDescription</key>
-  <string>This app uses your location even when in the background to record attendance.</string>
+  <string>This app needs your location even when running in the background to accurately track attendance.</string>
 
   <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>This app uses your location to enable location-based attendance.</string>
+  <string>This app needs your location for both background and foreground attendance tracking.</string>
 
-  <!-- ✅ Network Configuration (e.g. for local API calls) -->
+  <!-- ✅ Required background mode -->
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+
+  <!-- ✅ Network Configuration -->
   <key>NSAppTransportSecurity</key>
   <dict>
     <key>NSAllowsArbitraryLoads</key>
