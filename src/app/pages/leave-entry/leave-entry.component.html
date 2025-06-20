@@ -70,16 +70,18 @@
 
         <ion-row>
 
-          <ion-col size="12" size-md="12">
-            <ion-item lines="full">
+                <ion-col size="12" size-md="6">
+            <ion-item lines="inset" class="leave-type-item">
               <ion-label position="floating" color="primary">Leave Type</ion-label>
-              <ion-select formControlName="leaveType" interface="popover">
+              <ion-select formControlName="leaveType" interface="alert">
                 <ion-select-option *ngFor="let type of leavetypeList" [value]="type.value">
                   {{ type.label }}
                 </ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
+
+
         </ion-row>
         <ion-row>
           <ion-col size="12" size-md="12">

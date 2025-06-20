@@ -33,7 +33,7 @@ public GetAlLeaveRequest() {
   return this.httpClient.get<any>(this.baseUrl + 'LeaveData/GetAlLeaveRequest',)
 }
 public InserLeaveRequest(data:any) {
-  return this.httpClient.post<any>(this.baseUrl + 'LeaveData/InserLeaveRequest',data)
+  return this.httpClient.post<any>(this.baseUrl + 'LeaveData/InsertLeaveRequest',data)
 }
 public GetAllHrLeaveType() {
   return this.httpClient.get<any>(this.baseUrl + 'HrLeaveType/GetAllHrLeaveType',)
