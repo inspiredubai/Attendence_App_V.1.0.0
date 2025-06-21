@@ -112,37 +112,41 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content fullscreen>
-      <div class="table-wrapper">
-        <div class="scrollable-table">
-          <table class="ion-table">
-            <thead>
-              <tr>
-                <th>Sr.No</th>
-                <th>From Date</th>
-                <th>To Date</th>
-                <!-- <th>Leave No</th> -->
-                <th>Leave Type</th>
-                <th>Remarks</th>
-                <!-- <th>Time</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let leave of leaves index as i">
-                <td>{{ i+1 }}</td>
+<ion-content fullscreen>
+  <div class="table-wrapper">
+    <div class="table-header">
+      <h2><ion-icon name="calendar-outline"></ion-icon></h2>
+    </div>
 
-                <td>{{ leave.leaveDataFrom | date }}</td>
-                <td>{{ leave.leaveDataTo | date }}</td>
-                <!-- <td>{{ leave.leaveNo }}</td> -->
-                <td>{{ getleaveTypeById(leave.leaveEmpid) }}</td>
-                <td>{{ leave.remarks }}</td>
-                <!-- <td>{{ leave.time }}</td> -->
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </ion-content>
+    <div class="table-responsive">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Type</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaves; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ leave.leaveDataFrom | date: 'MMM d, y' }}</td>
+            <td>{{ leave.leaveDataTo | date: 'MMM d, y' }}</td>
+          <td>{{ getleaveTypeById(leave.leaveEmpid) }}</td>
+            <td>{{ leave.remarks }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>
+
+
+
+
+
 
   </ng-template>
 </ion-modal>
