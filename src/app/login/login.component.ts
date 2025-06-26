@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
       Rememberme: [false, [Validators.required]],
     });
   }
-
+  goToChangePassword() {
+    this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
+  }
   onLogin(){
     this.isLoading = true;
     this.apiLogin.loginRequest(this.loginForm.value).subscribe((k: any) => {

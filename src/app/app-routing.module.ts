@@ -7,6 +7,7 @@ import { SmartPunchComponent } from './pages/smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './pages/attendance-detail/attendance-detail.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { LeaveEntryComponent } from './pages/leave-entry/leave-entry.component';
+import { PasswordChangeComponent } from './login/password-change/password-change.component';
 
 const routes: Routes = [
    
@@ -31,7 +32,8 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-   {
+   
+     {
       path: 'attendancesummary',
       component: AttendanceSummaryComponent
     },
