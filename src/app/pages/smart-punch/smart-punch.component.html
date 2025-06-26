@@ -4,20 +4,34 @@
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Inspire</ion-title>
+    <ion-title>Mercury Payment Services</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button fill="clear">
+      <!-- <ion-button fill="clear">
         <ion-icon slot="icon-only" name="color-palette-outline"></ion-icon>
       </ion-button>
       <ion-button fill="clear">
         <ion-icon slot="icon-only" name="home-outline"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
+      </ion-button> -->
+      <ion-button fill="clear" (click)="openPopover($event)">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
+
+
+
+
+      <!-- Popover component -->
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
+        <ng-template>
+          <ion-list>
+            <!-- <ion-item (click)="selectOption('profile')">Profile</ion-item>
+            <ion-item (click)="selectOption('settings')">Settings</ion-item> -->
+            <ion-item (click)="selectOption('logout')">Logout</ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

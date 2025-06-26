@@ -5,6 +5,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
 import { DataService } from 'src/app/services/data.service';
 import * as L from 'leaflet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-smart-punch',
@@ -77,8 +78,31 @@ export class SmartPunchComponent implements OnInit {
   center!: google.maps.LatLngLiteral;
   markerPosition!: google.maps.LatLngLiteral;
   zoom = 15;
+  popoverOpen = false;
+  popoverEvent: any = null;
 
-  constructor(private dataservice: DataService) { }
+  constructor(
+    private dataservice: DataService,
+    private router: Router,) { }
+
+  openPopover(event: Event) {
+    this.popoverEvent = event;
+    this.popoverOpen = true;
+  }
+   selectOption(option: string) {
+    console.log('Selected:', option);
+    this.popoverOpen = false;
+
+    if (option === 'logout') {
+      this.logout();
+    }
+  }
+
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
     this.getCurrentLocation();
