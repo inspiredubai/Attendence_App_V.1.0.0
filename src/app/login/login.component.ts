@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private toastController: ToastController, private navCtrl: NavController,   
     private apiLogin: LoginService,
     private fb: UntypedFormBuilder,
-    private toastService: ToastService)
+    private toastService: ToastService
+  )
      { }
   ngOnInit(): void {
     this.loginForm = this.fb.group({

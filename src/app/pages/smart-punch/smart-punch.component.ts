@@ -103,6 +103,9 @@ export class SmartPunchComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
+        goToChangePassword() {
+    this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
+  }
 
   ngOnInit(): void {
     this.getCurrentLocation();

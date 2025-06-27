@@ -524,7 +524,7 @@ export class HomePage {
     private fb: UntypedFormBuilder,
     private dataservice: DataService,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
@@ -558,14 +558,18 @@ export class HomePage {
     }
   }
 
-async requestLocationPermission() {
-  try {
-    const permission = await Geolocation.requestPermissions();
-    console.log('Permission status:', permission);
-  } catch (error) {
-    console.error('Permission request error:', error);
+  goToChangePassword() {
+    this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
   }
-}
+
+  async requestLocationPermission() {
+    try {
+      const permission = await Geolocation.requestPermissions();
+      console.log('Permission status:', permission);
+    } catch (error) {
+      console.error('Permission request error:', error);
+    }
+  }
 
   async getCurrentLocation() {
     try {
@@ -725,13 +729,15 @@ async requestLocationPermission() {
   }
 
   selectOption(option: string) {
-    console.log('Selected:', option);
-    this.popoverOpen = false;
+    this.popoverOpen = false; // Close the popover
 
     if (option === 'logout') {
       this.logout();
+    } else if (option === 'changePassword') {
+      this.goToChangePassword();
     }
   }
+
 
   logout() {
     localStorage.clear();
