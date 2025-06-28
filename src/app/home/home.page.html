@@ -16,12 +16,14 @@
       </ion-button>
 
       <!-- Popover component -->
-      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false">
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false"[dismissOnSelect]="true">
         <ng-template>
           <ion-list>
             <!-- <ion-item (click)="selectOption('profile')">Profile</ion-item>
             <ion-item (click)="selectOption('settings')">Settings</ion-item> -->
-            <ion-item (click)="selectOption('logout')">Logout</ion-item>
+            <ion-item (click)="selectOption('logout')" style="cursor:pointer;">Logout</ion-item>
+            <ion-item (click)="selectOption('changePassword')" style="cursor:pointer;">Change Password</ion-item>
+
           </ion-list>
         </ng-template>
       </ion-popover>

@@ -52,6 +52,11 @@ export class LeaveEntryComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
+      goToChangePassword() {
+    this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
+        this.popoverOpen = false;
+
+  }
   ngOnInit() {
         this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
     this.leaveEntryFromGroup = this.fb.group({

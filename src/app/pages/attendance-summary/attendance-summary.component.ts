@@ -54,6 +54,10 @@ export class AttendanceSummaryComponent implements OnInit {
 
     });
   }
+
+    goToChangePassword() {
+    this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
+  }
   getTodayDateString(): string {
     const today = new Date();
     const yyyy = today.getFullYear();

@@ -21,10 +21,13 @@ export class LoginService {
 
   }
 
-  // public loginRequest(data1: any) {
-  //   console.log(data1);
-  //   return this.httpClient.post<any>(this.baseUrl + 'Login', data1)
-  // }
+public changePassword(userId: number, password: string) {
+  const url = `${this.baseUrl}UpdateUser?userId=${userId}&password=${encodeURIComponent(password)}`;
+  return this.httpClient.post<any>(url, {});
+}
+
+
+
 
   public loginRequest(data1: any) {  
     return this.httpClient.post<any>(this.baseUrl + 'Login', data1).pipe(
