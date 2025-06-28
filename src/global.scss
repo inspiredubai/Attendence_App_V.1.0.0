@@ -55,3 +55,14 @@
     left: 10px;
     top: 10px;
   }
+html, body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (prefers-color-scheme: light) {
+  html, body {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
