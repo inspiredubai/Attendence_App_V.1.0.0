@@ -38,4 +38,8 @@ public InserLeaveRequest(data:any) {
 public GetAllHrLeaveType() {
   return this.httpClient.get<any>(this.baseUrl + 'HrLeaveType/GetAllHrLeaveType',)
 }
+public deleteLeaveRequestById(id: number) {
+  return this.httpClient.post<any>(`${this.baseUrl}LeaveData/DeleteLeaveDataReqById/${id}`, null);
+}
+
 }
