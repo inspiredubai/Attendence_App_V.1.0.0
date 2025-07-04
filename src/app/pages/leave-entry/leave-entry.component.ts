@@ -61,10 +61,10 @@ export class LeaveEntryComponent implements OnInit {
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
     this.leaveEntryFromGroup = this.fb.group({
-      fromDate: [this.getTodayDateString()],
-      toDate: [this.getTodayDateString()],
-      remarks: [null],
-      leaveType: [null,],
+      fromDate: [this.getTodayDateString(), [Validators.required]],
+      toDate: [this.getTodayDateString(), [Validators.required]],
+      remarks: [null, [Validators.required]],
+      leaveType: [null, [Validators.required]],
     })
     // this.GetAlLeaveRequest()
     this.GetAllHrLeaveType()
@@ -97,7 +97,6 @@ export class LeaveEntryComponent implements OnInit {
       LeaveDataTypeNavigation: null,
       LeaveEmp: null,
     };
-
     this.dataservice.InserLeaveRequest(payload).subscribe((res) => {
       if (res) {
         this.toastService.presentToast("Leave Applied");
@@ -107,12 +106,18 @@ export class LeaveEntryComponent implements OnInit {
       }
     })
   }
-  GetAlLeaveRequest() {
-    this.dataservice.GetAlLeaveRequest().subscribe((res) => {
-      if (res)
-        this.leaves = res.filter((res: any) => res.leaveEmpid == this.userDetails.userId);
-    })
-  }
+GetAlLeaveRequest() {
+  this.dataservice.GetAlLeaveRequest().subscribe((res: any[]) => {
+    if (res && this.userDetails?.userId) {
+      this.leaves = res.filter(item => item.leaveEmpid === this.userDetails.userId);
+    } else {
+      this.leaves = [];
+      console.warn('No userDetails or response data found.');
+    }
+  }, error => {
+    console.error('Error fetching leave requests:', error);
+  });
+}
   GetAllHrLeaveType() {
     this.dataservice.GetAllHrLeaveType().subscribe((res) => {
       this.leavetypeArray = res;

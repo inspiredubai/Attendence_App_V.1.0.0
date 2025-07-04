@@ -95,7 +95,7 @@
         </ion-row>
         <ion-row class="ion-justify-content-center ion-margin-top">
           <ion-col size="12" size-md="4">
-            <ion-button expand="block" color="primary" (click)="submit()">
+            <ion-button [disabled]="leaveEntryFromGroup.invalid" expand="block" color="primary" (click)="submit()">
               Submit
             </ion-button>
           </ion-col>
