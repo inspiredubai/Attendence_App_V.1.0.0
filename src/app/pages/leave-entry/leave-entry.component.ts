@@ -24,6 +24,7 @@ export class LeaveEntryComponent implements OnInit {
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+    this.leaves=null
     this.GetAlLeaveRequest();
   }
 
@@ -52,66 +53,71 @@ export class LeaveEntryComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
-      goToChangePassword() {
+  goToChangePassword() {
     this.router.navigate(['/login/passwordchange']); // Adjust the route path accordingly
-        this.popoverOpen = false;
+    this.popoverOpen = false;
 
   }
   ngOnInit() {
-        this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
     this.leaveEntryFromGroup = this.fb.group({
-      fromDate: [this.getTodayDateString()],
-      toDate: [this.getTodayDateString()],
-      remarks: [null],
-      leaveType: [null,],
+      fromDate: [this.getTodayDateString(), [Validators.required]],
+      toDate: [this.getTodayDateString(), [Validators.required]],
+      remarks: [null, [Validators.required]],
+      leaveType: [null, [Validators.required]],
     })
-    this.GetAlLeaveRequest()
+    // this.GetAlLeaveRequest()
     this.GetAllHrLeaveType()
   }
   submit() {
-   const fromDate = new Date(this.leaveEntryFromGroup.get('fromDate')?.value);
-const toDate = new Date(this.leaveEntryFromGroup.get('toDate')?.value);
-const applyDate=new Date()
-// Calculate difference in milliseconds and convert to days (+1 to include both start and end dates)
-const diffTime = Math.abs(toDate.getTime() - fromDate.getTime());
-const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    const fromDate = new Date(this.leaveEntryFromGroup.get('fromDate')?.value);
+    const toDate = new Date(this.leaveEntryFromGroup.get('toDate')?.value);
+    const applyDate = new Date()
+    // Calculate difference in milliseconds and convert to days (+1 to include both start and end dates)
+    const diffTime = Math.abs(toDate.getTime() - fromDate.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-let payload = {
-  LeavDataId: 0,
-  LeaveEmpid: this.userDetails.userId,
-  LeaveDataType: this.leaveEntryFromGroup.get('leaveType')?.value,
-  LeaveDataFrom: this.leaveEntryFromGroup.get('fromDate')?.value,
-  LeaveDataTo: this.leaveEntryFromGroup.get('toDate')?.value,
-  LeaveDays: diffDays,
-  LeaveDataReason: null,
-  ReqDate: applyDate,
-  ApproveDate: null,
-  ApprovedBy: null,
-  RejectedDate: null,
-  RejectedBy: null,
-  Remarks: this.leaveEntryFromGroup.get('remarks')?.value,
-  Status: 0,
-  AppStatus: null,
-  LeaveReqImage: null,
-  LeaveDataTypeNavigation: null,
-  LeaveEmp: null,
-};
-
+    let payload = {
+      LeavDataId: 0,
+      LeaveEmpid: this.userDetails.userId,
+      LeaveDataType: this.leaveEntryFromGroup.get('leaveType')?.value,
+      LeaveDataFrom: this.leaveEntryFromGroup.get('fromDate')?.value,
+      LeaveDataTo: this.leaveEntryFromGroup.get('toDate')?.value,
+      LeaveDays: diffDays,
+      LeaveDataReason: null,
+      ReqDate: applyDate,
+      ApproveDate: null,
+      ApprovedBy: null,
+      RejectedDate: null,
+      RejectedBy: null,
+      Remarks: this.leaveEntryFromGroup.get('remarks')?.value,
+      Status: 0,
+      AppStatus: null,
+      LeaveReqImage: null,
+      LeaveDataTypeNavigation: null,
+      LeaveEmp: null,
+    };
     this.dataservice.InserLeaveRequest(payload).subscribe((res) => {
-         if (res) {
-          this.toastService.presentToast("Leave Applied");
+      if (res) {
+        this.toastService.presentToast("Leave Applied");
 
-        }else{
-          this.toastService.presentToastErrror("SomeThing Went Wrong");
-        }
+      } else {
+        this.toastService.presentToastErrror("SomeThing Went Wrong");
+      }
     })
   }
-  GetAlLeaveRequest() {
-    this.dataservice.GetAlLeaveRequest().subscribe((res) => {
-      if (res)
-        this.leaves = res
-    })
-  }
+GetAlLeaveRequest() {
+  this.dataservice.GetAlLeaveRequest().subscribe((res: any[]) => {
+    if (res && this.userDetails?.userId) {
+      this.leaves = res.filter(item => item.leaveEmpid === this.userDetails.userId);
+    } else {
+      this.leaves = [];
+      console.warn('No userDetails or response data found.');
+    }
+  }, error => {
+    console.error('Error fetching leave requests:', error);
+  });
+}
   GetAllHrLeaveType() {
     this.dataservice.GetAllHrLeaveType().subscribe((res) => {
       this.leavetypeArray = res;
@@ -134,5 +140,12 @@ let payload = {
   getleaveTypeById(id: any) {
     return this.leavetypeList.find((res: any) => res.value == id)?.label;
   }
-
+  onDelete(id: any) {
+    this.dataservice.deleteLeaveRequestById(id).subscribe((res)=>{
+      if(res!=null){
+     this.GetAlLeaveRequest()
+      this.toastService.presentToast("Deleted Successfully");
+      }
+    })
+  }
 }

@@ -17,6 +17,8 @@ export class PasswordChangeComponent implements OnInit {
   popoverOpen = false;
   popoverEvent: any = null;
   isLoading: boolean = false;
+    showPassword: boolean = false;
+    Password: boolean = false;
   userDetails: any;
   constructor(
     private apiLogin: LoginService,
@@ -64,10 +66,10 @@ export class PasswordChangeComponent implements OnInit {
     this.isLoading = true;
     let newPass = this.ChangePasswordForm.get('NewPassword')?.value;
     let UserId = Number(this.userDetails.userId)
-    console.log("value", newPass)
     this.apiLogin.changePassword(UserId, newPass).subscribe((k: any) => {
       this.isLoading = false;
       if (k) {
+        this.ChangePasswordForm.reset();
         this.router.navigate(['']);
         this.toastService.presentToast('Password has been changed');
 
@@ -81,4 +83,12 @@ export class PasswordChangeComponent implements OnInit {
     const confirmPassword = form.get('RepeatPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
+
+togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;
+}
+showtogglePassword() {
+  this.Password = !this.Password;
+}
+
 }

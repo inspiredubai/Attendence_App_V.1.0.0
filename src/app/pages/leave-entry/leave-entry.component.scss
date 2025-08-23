@@ -328,3 +328,25 @@ ion-button {
   border-bottom: none;
 }
 
+.custom-delete-button {
+  background-color: #dc3545;       /* Bootstrap red */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-delete-button:hover {
+  background-color: #c82333;       /* Darker red on hover */
+  transform: scale(1.05);          /* Slight grow effect */
+}
+
+.custom-delete-button:active {
+  transform: scale(1);
+}

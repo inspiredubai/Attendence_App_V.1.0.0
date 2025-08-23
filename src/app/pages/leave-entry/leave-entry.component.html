@@ -23,7 +23,8 @@
 
 
       <!-- Popover component -->
-      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false" [dismissOnSelect]="true">
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false"
+        [dismissOnSelect]="true">
         <ng-template>
           <ion-list>
             <!-- <ion-item (click)="selectOption('profile')">Profile</ion-item>
@@ -42,7 +43,7 @@
 
 
 <ion-content class="ion-padding">
-  <ion-card class="leave-card" [formGroup]="leaveEntryFromGroup" >
+  <ion-card class="leave-card" [formGroup]="leaveEntryFromGroup">
     <ion-card-header>
       <ion-card-title class="text-center">
         <b>Leave Entry</b>
@@ -71,7 +72,7 @@
 
         <ion-row>
 
-                <ion-col size="12" size-md="6">
+          <ion-col size="12" size-md="6">
             <ion-item lines="inset" class="leave-type-item">
               <ion-label position="floating" color="primary">Leave Type</ion-label>
               <ion-select formControlName="leaveType" interface="alert">
@@ -94,7 +95,7 @@
         </ion-row>
         <ion-row class="ion-justify-content-center ion-margin-top">
           <ion-col size="12" size-md="4">
-            <ion-button expand="block" color="primary" (click)="submit()">
+            <ion-button [disabled]="leaveEntryFromGroup.invalid" expand="block" color="primary" (click)="submit()">
               Submit
             </ion-button>
           </ion-col>
@@ -113,36 +114,51 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-<ion-content fullscreen>
-  <div class="table-wrapper">
-    <div class="table-header">
-      <h2><ion-icon name="calendar-outline"></ion-icon></h2>
-    </div>
+    <ion-content fullscreen>
+      <div class="table-wrapper">
+        <div class="table-header">
+          <h2><ion-icon name="calendar-outline"></ion-icon></h2>
+        </div>
 
-    <div class="table-responsive">
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Type</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let leave of leaves; index as i">
-            <td>{{ i + 1 }}</td>
-            <td>{{ leave.leaveDataFrom | date: 'MMM d, y' }}</td>
-            <td>{{ leave.leaveDataTo | date: 'MMM d, y' }}</td>
-          <td>{{ getleaveTypeById(leave.leaveEmpid) }}</td>
-            <td>{{ leave.remarks }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</ion-content>
+        <div class="table-responsive">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let leave of leaves; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ leave.leaveDataFrom | date: 'MMM d, y' }}</td>
+                <td>{{ leave.leaveDataTo | date: 'MMM d, y' }}</td>
+                <td>{{ getleaveTypeById(leave.leaveDataType) }}</td>
+                <td [ngStyle]="{ 'color': leave.status == 1 ? 'green' : (leave.status == 2 ? 'red' : 'black')}">{{
+                  leave.status == 1 ? 'Approved' : (leave.status == 2 ? 'Rejected' : 'Pending') }}</td>
+            <td>
+  <button 
+    *ngIf="leave.status == 0" 
+    class="custom-delete-button" 
+    (click)="onDelete(leave.leavDataId)"
+    title="Delete this record"
+  >
+    🗑 Delete
+  </button>
+</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ion-content>
 
 
 
