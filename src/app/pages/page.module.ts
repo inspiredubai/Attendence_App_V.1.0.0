@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LeaveEntryComponent } from './leave-entry/leave-entry.component';
+import { AttendanceComponent } from './attendance/attendance.component';
  
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { LeaveEntryComponent } from './leave-entry/leave-entry.component';
         IonicModule.forRoot(),
 
     ],
-  declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent,CheckoutComponent,LeaveEntryComponent],
+  declarations: [AttendanceSummaryComponent,SmartPunchComponent,AttendanceDetailComponent,CheckoutComponent,LeaveEntryComponent,AttendanceComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageModule {}

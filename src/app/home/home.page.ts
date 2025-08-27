@@ -693,35 +693,69 @@ export class HomePage {
     // );
   }
 
-  get cardItems() {
-    return [
-      {
-        label: 'Check In',
-        action: () => this.onCheckIn(),
-        disabled: this.isCheckedIn
-      },
-      {
-        label: 'Check Out',
-        action: () => this.onCheckOut(),
-        disabled: !this.isCheckedIn
-      },
-      {
-        label: 'Attendance Summary',
-        action: () => this.onattendancesummary(),
-        disabled: false
-      },
-      {
-        label: 'Leave Entry',
-        action: () => this.onleaveEntry(),
-        disabled: false
-      },
-      {
-        label: 'SMART PUNCH - ONE TO ONE',
-        action: () => this.onsmartpunch(),
-        disabled: false
-      }
-    ];
-  }
+  // get cardItems() {
+  //   return [
+  //     {
+  //       label: 'Check In',
+  //       action: () => this.onCheckIn(),
+  //       disabled: this.isCheckedIn
+  //     },
+  //     {
+  //       label: 'Check Out',
+  //       action: () => this.onCheckOut(),
+  //       disabled: !this.isCheckedIn
+  //     },
+  //     {
+  //       label: 'Attendance Summary',
+  //       action: () => this.onattendancesummary(),
+  //       disabled: false
+  //     },
+  //     {
+  //       label: 'Leave Entry',
+  //       action: () => this.onleaveEntry(),
+  //       disabled: false
+  //     },
+  //     {
+  //       label: 'SMART PUNCH - ONE TO ONE',
+  //       action: () => this.onsmartpunch(),
+  //       disabled: false
+  //     }
+  //   ];
+  // }
+get cardItems() {
+  return [
+    {
+      label: 'Check In',
+      icon: 'log-in-outline',
+      action: () => this.onCheckIn(),
+      disabled: this.isCheckedIn
+    },
+    {
+      label: 'Check Out',
+      icon: 'log-out-outline',
+      action: () => this.onCheckOut(),
+      disabled: !this.isCheckedIn
+    },
+    {
+      label: 'Attendance Summary',
+      icon: 'calendar-outline',
+      action: () => this.onattendancesummary(),
+      disabled: false
+    },
+    {
+      label: 'Leave Entry',
+      icon: 'document-text-outline',
+      action: () => this.onleaveEntry(),
+      disabled: false
+    },
+    {
+      label: 'SMART PUNCH - ONE TO ONE',
+      icon: 'finger-print-outline',
+      action: () => this.onsmartpunch(),
+      disabled: false
+    }
+  ];
+}
 
   openPopover(event: Event) {
     this.popoverEvent = event;

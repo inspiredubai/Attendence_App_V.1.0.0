@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -141,16 +141,12 @@
                 <td>{{ getleaveTypeById(leave.leaveDataType) }}</td>
                 <td [ngStyle]="{ 'color': leave.status == 1 ? 'green' : (leave.status == 2 ? 'red' : 'black')}">{{
                   leave.status == 1 ? 'Approved' : (leave.status == 2 ? 'Rejected' : 'Pending') }}</td>
-            <td>
-  <button 
-    *ngIf="leave.status == 0" 
-    class="custom-delete-button" 
-    (click)="onDelete(leave.leavDataId)"
-    title="Delete this record"
-  >
-    🗑 Delete
-  </button>
-</td>
+                <td>
+                  <button *ngIf="leave.status == 0" class="custom-delete-button" (click)="onDelete(leave.leavDataId)"
+                    title="Delete this record">
+                    🗑 Delete
+                  </button>
+                </td>
 
 
               </tr>

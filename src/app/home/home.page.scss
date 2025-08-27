@@ -28,19 +28,14 @@ ion-toolbar {
   }
   
   ion-card-title{
-    color: #3b57c1;
+    color: #f6f7fa;
     font-size: 1.6em;
     margin: 1em 0 0.5em 0;
     font-weight: bold;
   }
   
   
-  ion-card-content {
-    color: #3b57c1;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
+ 
   ion-title {
     font-size: 1.5em;
     font-weight: bold;
@@ -80,4 +75,54 @@ ion-toolbar {
       margin-left: 0;  
     }
   }
+  ion-content {
+  --background: linear-gradient(to bottom, #1976d2 0%, #a3c5e1 50%, #ebf4fb 100%);
+}
+
+ion-card {
+  border-radius: 20px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+}
+
+  .square-card {
+  aspect-ratio: 1 / 1;   /* ✅ forces square */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+width: 96%;
+height: 130px;
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon {
+    font-size: 40px;
+    color: #1976d2;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-weight: 500;
+    color: #333;
+  }
   
+}

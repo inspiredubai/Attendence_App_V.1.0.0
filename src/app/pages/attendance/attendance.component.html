@@ -1,0 +1,80 @@
+ <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-badge color="danger" slot="end">3</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-page">
+
+  <!-- Grid Menu -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="school-outline"></ion-icon>
+          <p>Attendance</p>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="card-outline"></ion-icon>
+          <p>Payments</p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="medkit-outline"></ion-icon>
+          <p>Clinic Log</p>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <p>Academic Calendar</p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="headset-outline"></ion-icon>
+          <p>Ticketing</p>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <div class="menu-card">
+          <ion-icon name="bus-outline"></ion-icon>
+          <p>Bus Messages</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Bottom Profile -->
+  <div class="profile-bar">
+    <ion-avatar>
+      <img src="assets/avatar.png" />
+    </ion-avatar>
+    <div>
+      <h3>Karim Mohamady</h3>
+      <p>KG-1</p>
+    </div>
+  </div>
+
+</ion-content>

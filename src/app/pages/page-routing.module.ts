@@ -5,6 +5,7 @@ import { SmartPunchComponent } from './smart-punch/smart-punch.component';
 import { AttendanceDetailComponent } from './attendance-detail/attendance-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LeaveEntryComponent } from './leave-entry/leave-entry.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 
  
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'leaveentry',
     component: LeaveEntryComponent 
+  },
+   {
+    path: 'attendance',
+    component: AttendanceComponent 
   }
 ];
 

@@ -211,4 +211,7 @@ ion-toolbar {
       background-color: #f4f4f4;
       font-weight: bold;
     }
+      ion-content {
+  --background: linear-gradient(to bottom, #1976d2 0%, #a3c5e1 50%, #ebf4fb 100%);
+}
     
