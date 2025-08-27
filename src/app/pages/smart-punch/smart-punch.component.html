@@ -23,12 +23,13 @@
 
 
       <!-- Popover component -->
-      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false" [dismissOnSelect]="true">
+      <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="popoverOpen = false"
+        [dismissOnSelect]="true">
         <ng-template>
           <ion-list>
             <!-- <ion-item (click)="selectOption('profile')">Profile</ion-item>
             <ion-item (click)="selectOption('settings')">Settings</ion-item> -->
-            <ion-item (click)="selectOption('logout')"style="cursor:pointer;">Logout</ion-item>
+            <ion-item (click)="selectOption('logout')" style="cursor:pointer;">Logout</ion-item>
             <ion-item (click)="goToChangePassword()" style="cursor:pointer;">Change Password</ion-item>
           </ion-list>
         </ng-template>
@@ -39,11 +40,11 @@
 <div class="map-container">
   <ion-card no-margin>
     <ion-card-header>
-      <ion-card-title><b>Attendance Summary </b></ion-card-title>  
+      <ion-card-title><b>Attendance Summary </b></ion-card-title>
       <p><strong>Latitude:</strong> {{ markerPosition.lat }}</p>
-  <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
+      <p><strong>Longitude:</strong> {{ markerPosition.lng }}</p>
 
-  <!-- <google-map 
+      <!-- <google-map 
     height="400px"
     width="100%"
     [center]="center"
@@ -51,19 +52,14 @@
     (mapClick)="updateMarkerPosition($event)">
     <map-marker [position]="markerPosition"></map-marker>
   </google-map> -->
-  <div style="height: 400px; width: 100%;">
-    <google-map
-      [height]="'100%'"
-      [width]="'100%'"
-      [center]="center"
-      [zoom]="zoom"
-      (mapClick)="updateMarkerPosition($event)">
-      <map-marker [position]="markerPosition"></map-marker>
-    </google-map>
-  </div>
-  
+      <div style="height: 400px; width: 100%;">
+        <google-map [height]="'100%'" [width]="'100%'" [center]="center" [zoom]="zoom"
+          (mapClick)="updateMarkerPosition($event)">
+          <map-marker [position]="markerPosition"></map-marker>
+        </google-map>
+      </div>
+
     </ion-card-header>
   </ion-card>
 
 </div>
-   

@@ -152,64 +152,142 @@ export class SmartPunchComponent implements OnInit {
   //     this.setDefaultLocation();
   //   }
   // }
-  async getCurrentLocation() {
-    try {
-      if (Capacitor.isNativePlatform()) {
-        await Geolocation.requestPermissions(); 
+  // async getCurrentLocation() {
+  //   try {
+  //     if (Capacitor.isNativePlatform()) {
+  //       await Geolocation.requestPermissions(); 
   
-        const position = await Geolocation.getCurrentPosition({
+  //       const position = await Geolocation.getCurrentPosition({
+  //         enableHighAccuracy: true,
+  //         timeout: 10000,
+  //         maximumAge: 0,
+  //       });
+  
+  //       this.center = {
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       };
+  //       this.markerPosition = { ...this.center };
+  //       console.log('Native Device Location:', this.center);
+  //     } else {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           this.center = {
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude,
+  //           };
+  //           this.markerPosition = { ...this.center };
+  //           console.log('Browser Location:', this.center);
+  //         },
+  //         (error) => {
+  //           console.error('Browser Geolocation Error:', error);
+  //           this.setDefaultLocation();
+  //         },
+  //         {
+  //           enableHighAccuracy: true,
+  //           timeout: 10000,
+  //           maximumAge: 0,
+  //         }
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('Error getting location:', error);
+  //     this.setDefaultLocation();
+  //   }
+  // }
+  
+
+  // setDefaultLocation() {
+  //   this.center = { lat: 31.4933248, lng: 74.3079936 };
+  //   this.markerPosition = { ...this.center };
+  // }
+
+  // updateMarkerPosition(event: google.maps.MapMouseEvent) {
+  //   if (event.latLng) {
+  //     this.markerPosition = {
+  //       lat: event.latLng.lat(),
+  //       lng: event.latLng.lng(),
+  //     };
+  //     this.dataservice.sendData(this.markerPosition);
+  //     console.log('Updated Marker Position:', this.markerPosition);
+  //   }
+  // }
+  async getCurrentLocation() {
+  try {
+    if (Capacitor.isNativePlatform()) {
+      // 📱 Native app (Android/iOS)
+      const perm = await Geolocation.requestPermissions();
+      if (perm.location !== 'granted') {
+        console.warn('Native location permission not granted, using fallback');
+        await this.setDefaultLocation();
+        return;
+      }
+
+      const position = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      });
+
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      this.markerPosition = { ...this.center };
+      console.log('Native Device Location:', this.center);
+
+    } else {
+      // 🌐 Browser
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          this.markerPosition = { ...this.center };
+          console.log('Browser Location:', this.center);
+        },
+        async (error) => {
+          console.error('Browser Geolocation Error:', error);
+          await this.setDefaultLocation(); // fallback if blocked/denied
+        },
+        {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0,
-        });
-  
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        this.markerPosition = { ...this.center };
-        console.log('Native Device Location:', this.center);
-      } else {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            this.markerPosition = { ...this.center };
-            console.log('Browser Location:', this.center);
-          },
-          (error) => {
-            console.error('Browser Geolocation Error:', error);
-            this.setDefaultLocation();
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0,
-          }
-        );
-      }
-    } catch (error) {
-      console.error('Error getting location:', error);
-      this.setDefaultLocation();
+        }
+      );
     }
+  } catch (error) {
+    console.error('Error getting location:', error);
+    await this.setDefaultLocation();
   }
-  
+}
 
-  setDefaultLocation() {
+async setDefaultLocation() {
+  try {
+    // 🌍 IP-based fallback
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    this.center = { lat: data.latitude, lng: data.longitude };
+    this.markerPosition = { ...this.center };
+    console.log('IP-based fallback location:', this.center);
+  } catch (e) {
+    // 📌 If IP fails, fallback to Lahore
+    console.error('IP lookup failed, using hardcoded fallback');
     this.center = { lat: 31.4933248, lng: 74.3079936 };
     this.markerPosition = { ...this.center };
   }
+}
 
-  updateMarkerPosition(event: google.maps.MapMouseEvent) {
-    if (event.latLng) {
-      this.markerPosition = {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      };
-      this.dataservice.sendData(this.markerPosition);
-      console.log('Updated Marker Position:', this.markerPosition);
-    }
+updateMarkerPosition(event: google.maps.MapMouseEvent) {
+  if (event.latLng) {
+    this.markerPosition = {
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    };
+    this.dataservice.sendData(this.markerPosition);
+    console.log('Updated Marker Position:', this.markerPosition);
   }
+}
 }
