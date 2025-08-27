@@ -247,7 +247,7 @@ export class SmartPunchComponent implements OnInit {
           this.markerPosition = { ...this.center };
           console.log('Browser Location:', this.center);
         },
-        async (error) => {
+        async (error) => { 
           console.error('Browser Geolocation Error:', error);
           await this.setDefaultLocation(); // fallback if blocked/denied
         },
