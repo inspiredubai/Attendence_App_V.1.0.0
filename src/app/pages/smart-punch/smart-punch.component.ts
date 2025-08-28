@@ -223,18 +223,29 @@ export class SmartPunchComponent implements OnInit {
         return;
       }
 
-      const position = await Geolocation.getCurrentPosition({
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0,
-      });
+      // 👇 Use watchPosition instead of single getCurrentPosition
+      const watchId = await Geolocation.watchPosition(
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 0,
+        },
+        (position, error) => {
+          if (error) {
+            console.error('Watch error:', error);
+            return;
+          }
 
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      this.markerPosition = { ...this.center };
-      console.log('Native Device Location:', this.center);
+          if (position) {
+            this.center = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            this.markerPosition = { ...this.center };
+            console.log('Refined Native Location:', this.center);
+          }
+        }
+      );
 
     } else {
       // 🌐 Browser
@@ -247,7 +258,7 @@ export class SmartPunchComponent implements OnInit {
           this.markerPosition = { ...this.center };
           console.log('Browser Location:', this.center);
         },
-        async (error) => { 
+        async (error) => {
           console.error('Browser Geolocation Error:', error);
           await this.setDefaultLocation(); // fallback if blocked/denied
         },
@@ -263,6 +274,7 @@ export class SmartPunchComponent implements OnInit {
     await this.setDefaultLocation();
   }
 }
+
 
 async setDefaultLocation() {
   try {
