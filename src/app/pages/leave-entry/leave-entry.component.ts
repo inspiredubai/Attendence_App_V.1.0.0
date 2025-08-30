@@ -100,6 +100,9 @@ export class LeaveEntryComponent implements OnInit {
     this.dataservice.InserLeaveRequest(payload).subscribe((res) => {
       if (res) {
         this.toastService.presentToast("Leave Applied");
+       this.leaveEntryFromGroup.reset();
+      this.leaveEntryFromGroup.get('fromDate')?.setValue(this.getTodayDateString());
+      this.leaveEntryFromGroup.get('toDate')?.setValue(this.getTodayDateString());
 
       } else {
         this.toastService.presentToastErrror("SomeThing Went Wrong");
