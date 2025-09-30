@@ -26,9 +26,6 @@ public changePassword(userId: number, password: string) {
   return this.httpClient.post<any>(url, {});
 }
 
-
-
-
   public loginRequest(data1: any) {  
     return this.httpClient.post<any>(this.baseUrl + 'Login', data1).pipe(
       tap(response => {  
