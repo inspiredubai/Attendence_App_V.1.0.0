@@ -10,6 +10,6 @@ export const environment = {
   //  apiRootURL: 'http://localhost:5001/api/', 
   // apiRootURL:'http://103.74.54.207:8092/api/'
  //  apiRootURL: 'http://103.74.54.207:8032/api/',
-     apiRootURL: 'http://194.233.95.37/:8032/api/',
+     apiRootURL: 'http://194.233.95.37:8032/api/',
 };
 
