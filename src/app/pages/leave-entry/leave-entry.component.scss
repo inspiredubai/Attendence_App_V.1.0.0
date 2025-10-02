@@ -25,11 +25,7 @@ ion-item {
       max-width: 100%;
     }
   }
-  ion-toolbar {
-    --background: #3b57c1;
-    --color: white;
-  }
-  
+ 
   .content-wrapper {
     padding: 1em;
   }
@@ -80,10 +76,9 @@ ion-item {
   }
   
   ion-toolbar {
-    --background: #3b57c1;
+       --background: #3b57c1;
     --color: white;
-  
-    --border-color: #eeecee;
+    --border-color: #2e469e;
     --border-width: 1px 0;
     --border-style: double;
   
